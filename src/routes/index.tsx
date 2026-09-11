@@ -107,6 +107,56 @@ const services = [
   },
 ];
 
+const plans: { name: string; blurb: string; price: string; features: string[]; dark?: boolean }[] = [
+  {
+    name: "Landing Page",
+    blurb: "A polished custom landing page designed and developed for businesses that need a focused, high-performing online presence.",
+    price: "€1,400",
+    features: [
+      "Development from a completed, build-ready Figma file",
+      "Responsive development in Framer or Wix Studio",
+      "Clean and consistent page build",
+      "Forms, links, interactions, and core functionality",
+      "Basic SEO and performance setup",
+      "Pre-launch testing, refinement, and launch support",
+    ],
+  },
+  {
+    name: "Multi-Page Website",
+    blurb: "A multi-page custom website for businesses that need more content space, stronger structure, and optional simple CMS setup.",
+    price: "€3,400",
+    features: [
+      "Development from a completed, build-ready Figma file",
+      "Responsive development in Framer or Wix Studio",
+      "Clean and consistent multi-page build",
+      "Forms, links, interactions, and core site functionality",
+      "Simple CMS setup where needed",
+      "Basic SEO and performance setup",
+      "Pre-launch testing, refinement, and launch support",
+    ],
+  },
+  {
+    name: "Advanced Website",
+    blurb: "For larger websites and more complex projects with advanced CMS setups, added functionality, and custom code components.",
+    price: "€8,500",
+    dark: true,
+    features: [
+      "Discovery session to clarify goals and requirements",
+      "Conversion-focused strategy and page planning",
+      "Content guidance and messaging review",
+      "Custom website design in Figma",
+      "Custom visual direction aligned with your brand",
+      "Responsive development in Framer or Wix Studio",
+      "Structured layout, typography, and visual hierarchy",
+      "Forms, links, interactions, and core site functionality",
+      "Advanced CMS setup and content organisation",
+      "Custom code components where required",
+      "Basic SEO and performance setup",
+      "Pre-launch testing, refinement, and launch support",
+    ],
+  },
+];
+
 const testimonials = [
   {
     img: client01,
