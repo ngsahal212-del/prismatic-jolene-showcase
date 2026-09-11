@@ -7,6 +7,9 @@ import proj03 from "@/assets/proj-03.jpg";
 import proj04 from "@/assets/proj-04.jpg";
 import proj05 from "@/assets/proj-05.jpg";
 import proj06 from "@/assets/proj-06.jpg";
+import svc01 from "@/assets/svc-01.jpg";
+import svc02 from "@/assets/svc-02.jpg";
+import svc03 from "@/assets/svc-03.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -69,6 +72,33 @@ const projects = [
   { img: proj04, name: "Vanguard Studio", category: "Architecture", year: "2024" },
   { img: proj05, name: "Nordic Form", category: "Interior Design", year: "2023" },
   { img: proj06, name: "Shootsy.io", category: "SaaS", year: "2022" },
+];
+
+const services = [
+  {
+    n: "01",
+    title: "Planning",
+    img: svc01,
+    imgAlt: "Hand pointing at a product roadmap sketched on a whiteboard",
+    heading: "Clear foundations",
+    text: "Planning the website before design and development begins. I shape the structure, content flow, and user journey so the website feels clear, organised, and ready to grow.",
+  },
+  {
+    n: "02",
+    title: "Design",
+    img: svc02,
+    imgAlt: "Open brand guidelines booklet showing color palettes and typography",
+    heading: "Creative direction",
+    text: "Designing clean, modern websites that feel aligned with your brand and easy to use. I focus on layout, typography, spacing, and consistency to create clear, considered, and visually strong designs.",
+  },
+  {
+    n: "03",
+    title: "Development",
+    img: svc03,
+    imgAlt: "Smartphone on a concrete block displaying a responsive website",
+    heading: "Build to perform",
+    text: "Bringing the website to life in Framer or Wix Studio with care and precision. I build responsive, well-structured websites that are easy to manage, scalable, and ready for a smooth launch.",
+  },
 ];
 
 function Index() {
