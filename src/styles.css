@@ -149,3 +149,11 @@
     font-family: "Inter Tight", ui-sans-serif, system-ui, sans-serif;
   }
 }
+
+@keyframes marquee-x {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.animate-marquee-x {
+  animation: marquee-x 18s linear infinite;
+}
