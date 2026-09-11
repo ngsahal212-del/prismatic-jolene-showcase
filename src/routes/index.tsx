@@ -41,9 +41,9 @@ export const Route = createFileRoute("/")({
 });
 
 const nav = [
-  { label: "Home", index: "01" },
-  { label: "Portfolio", index: "02" },
-  { label: "Contact", index: "03" },
+  { label: "Home", index: "01", href: "/" },
+  { label: "Portfolio", index: "02", href: "/portfolio" },
+  { label: "Contact", index: "03", href: "#contact" },
 ];
 
 const credentials = [
@@ -223,7 +223,7 @@ function Index() {
               {nav.map((item) => (
                 <a
                   key={item.label}
-                  href="#"
+                  href={item.href}
                   className="group flex items-start gap-1.5 text-sm font-medium text-white transition-opacity hover:opacity-70 md:text-base"
                 >
                   {item.label}
