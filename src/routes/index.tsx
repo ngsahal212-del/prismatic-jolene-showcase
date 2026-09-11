@@ -1,8 +1,8 @@
 import { useRef, useState } from "react";
 
 import { createFileRoute } from "@tanstack/react-router";
-import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 
+import { SlopedSection } from "@/components/SlopedSection";
 import { SiteClosing } from "@/components/SiteClosing";
 import fluted from "@/assets/fluted-glass.jpg";
 import portrait from "@/assets/portrait-jo.jpg";
@@ -247,23 +247,6 @@ function Index() {
   const [tick, setTick] = useState(0);
   const t = testimonials[active]!;
 
-  const aboutRef = useRef<HTMLElement | null>(null);
-  const { scrollYProgress } = useScroll({
-    target: aboutRef,
-    offset: ["start end", "start start"],
-  });
-  const smooth = useSpring(scrollYProgress, { stiffness: 38, damping: 26, mass: 1.1 });
-  const clipPath = useTransform(
-    smooth,
-    [0, 1],
-    [
-      "polygon(0% 0%, 100% 14%, 100% 100%, 0% 100%)",
-      "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-    ],
-  );
-  const heroScale = useTransform(smooth, [0, 1], [1, 1.06]);
-  const heroOpacity = useTransform(smooth, [0, 1], [1, 0.55]);
-
   const go = (dir: 1 | -1) => {
     setActive((a) => (a + dir + testimonials.length) % testimonials.length);
     setTick((k) => k + 1);
@@ -271,10 +254,7 @@ function Index() {
   return (
     <main className="bg-neutral-950">
       {/* Hero */}
-      <motion.section
-        style={{ scale: heroScale, opacity: heroOpacity }}
-        className="sticky top-0 h-screen w-full overflow-hidden [height:100dvh]"
-      >
+      <section className="sticky top-0 z-0 h-screen w-full overflow-hidden [height:100dvh]">
         <img
           src={fluted}
           alt=""
@@ -337,14 +317,10 @@ function Index() {
             </div>
           </div>
         </div>
-      </motion.section>
+      </section>
 
       {/* About */}
-      <motion.section
-        ref={aboutRef}
-        style={{ clipPath, willChange: "clip-path" }}
-        className="relative z-10 -mt-[14vh] w-full bg-neutral-950 px-6 pb-12 pt-[22vh] md:-mt-[16vh] md:px-14 md:pb-16 md:pt-[26vh]"
-      >
+      <SlopedSection className="w-full bg-neutral-950 px-6 pb-12 pt-[190px] md:px-14 md:pb-16 md:pt-[230px]">
         <div className="mb-4 h-px w-full bg-white/15" />
         <div className="flex items-start justify-between">
           <span className="text-xs font-semibold tracking-wide text-white">(01)</span>
@@ -398,10 +374,10 @@ function Index() {
             </div>
           ))}
         </div>
-      </motion.section>
+      </SlopedSection>
 
       {/* (02) Portfolio */}
-      <section id="portfolio" className="relative z-10 w-full bg-white text-black">
+      <SlopedSection id="portfolio" className="w-full bg-white pt-[150px] text-black">
         <div className="flex items-center justify-between border-t border-black/15 px-6 py-4 text-xs md:px-14">
           <span>(02)</span>
           <span>Portfolio</span>
@@ -440,10 +416,10 @@ function Index() {
             ))}
           </div>
         </div>
-      </section>
+      </SlopedSection>
 
       {/* (03) Services */}
-      <section id="services" className="relative z-10 w-full bg-neutral-950 text-white">
+      <SlopedSection id="services" className="w-full bg-neutral-950 pt-[150px] text-white">
         <div className="flex items-center justify-between border-t border-white/15 px-6 py-4 text-xs font-semibold md:px-14">
           <span>(03)</span>
           <span>Services</span>
@@ -504,10 +480,10 @@ function Index() {
             customisation for businesses that want to launch faster with a strong foundation.
           </p>
         </div>
-      </section>
+      </SlopedSection>
 
       {/* (04) Testimonials */}
-      <section id="testimonials" className="relative z-10 w-full bg-white text-black">
+      <SlopedSection id="testimonials" className="w-full bg-white pt-[150px] text-black">
         <div className="flex items-center justify-between border-t border-black/15 px-6 py-4 text-xs md:px-14">
           <span>(04)</span>
           <span>Testimonials</span>
@@ -558,7 +534,7 @@ function Index() {
             “{t.quote}”
           </blockquote>
         </div>
-      </section>
+      </SlopedSection>
 
       {/* (05) Estimates */}
       <section id="estimates" className="relative z-10 w-full bg-white text-black">
