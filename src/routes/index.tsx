@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 import { createFileRoute } from "@tanstack/react-router";
+import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 
 import { SiteClosing } from "@/components/SiteClosing";
 import fluted from "@/assets/fluted-glass.jpg";
@@ -246,6 +247,23 @@ function Index() {
   const [tick, setTick] = useState(0);
   const t = testimonials[active]!;
 
+  const aboutRef = useRef<HTMLElement | null>(null);
+  const { scrollYProgress } = useScroll({
+    target: aboutRef,
+    offset: ["start end", "start start"],
+  });
+  const smooth = useSpring(scrollYProgress, { stiffness: 38, damping: 26, mass: 1.1 });
+  const clipPath = useTransform(
+    smooth,
+    [0, 1],
+    [
+      "polygon(0% 0%, 100% 14%, 100% 100%, 0% 100%)",
+      "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+    ],
+  );
+  const heroScale = useTransform(smooth, [0, 1], [1, 1.06]);
+  const heroOpacity = useTransform(smooth, [0, 1], [1, 0.55]);
+
   const go = (dir: 1 | -1) => {
     setActive((a) => (a + dir + testimonials.length) % testimonials.length);
     setTick((k) => k + 1);
@@ -253,7 +271,10 @@ function Index() {
   return (
     <main className="bg-neutral-950">
       {/* Hero */}
-      <section className="relative h-screen w-full overflow-hidden [height:100dvh]">
+      <motion.section
+        style={{ scale: heroScale, opacity: heroOpacity }}
+        className="sticky top-0 h-screen w-full overflow-hidden [height:100dvh]"
+      >
         <img
           src={fluted}
           alt=""
@@ -316,10 +337,15 @@ function Index() {
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* About */}
-      <section className="w-full border-t border-white/10 bg-neutral-950 px-6 py-12 md:px-14 md:py-16">
+      <motion.section
+        ref={aboutRef}
+        style={{ clipPath, willChange: "clip-path" }}
+        className="relative z-10 -mt-[14vh] w-full bg-neutral-950 px-6 pb-12 pt-[22vh] md:-mt-[16vh] md:px-14 md:pb-16 md:pt-[26vh]"
+      >
+        <div className="mb-4 h-px w-full bg-white/15" />
         <div className="flex items-start justify-between">
           <span className="text-xs font-semibold tracking-wide text-white">(01)</span>
           <span className="text-xs font-semibold tracking-wide text-white">About</span>
@@ -372,10 +398,10 @@ function Index() {
             </div>
           ))}
         </div>
-      </section>
+      </motion.section>
 
       {/* (02) Portfolio */}
-      <section id="portfolio" className="w-full bg-white text-black">
+      <section id="portfolio" className="relative z-10 w-full bg-white text-black">
         <div className="flex items-center justify-between border-t border-black/15 px-6 py-4 text-xs md:px-14">
           <span>(02)</span>
           <span>Portfolio</span>
@@ -417,7 +443,7 @@ function Index() {
       </section>
 
       {/* (03) Services */}
-      <section id="services" className="w-full bg-neutral-950 text-white">
+      <section id="services" className="relative z-10 w-full bg-neutral-950 text-white">
         <div className="flex items-center justify-between border-t border-white/15 px-6 py-4 text-xs font-semibold md:px-14">
           <span>(03)</span>
           <span>Services</span>
@@ -481,7 +507,7 @@ function Index() {
       </section>
 
       {/* (04) Testimonials */}
-      <section id="testimonials" className="w-full bg-white text-black">
+      <section id="testimonials" className="relative z-10 w-full bg-white text-black">
         <div className="flex items-center justify-between border-t border-black/15 px-6 py-4 text-xs md:px-14">
           <span>(04)</span>
           <span>Testimonials</span>
@@ -535,7 +561,7 @@ function Index() {
       </section>
 
       {/* (05) Estimates */}
-      <section id="estimates" className="w-full bg-white text-black">
+      <section id="estimates" className="relative z-10 w-full bg-white text-black">
         <div className="flex items-center justify-between border-t border-black/15 px-6 py-4 text-xs md:px-14">
           <span>(05)</span>
           <span>Estimates</span>
@@ -558,7 +584,9 @@ function Index() {
         </div>
       </section>
 
-      <SiteClosing />
+      <div className="relative z-10">
+        <SiteClosing />
+      </div>
     </main>
   );
 }
