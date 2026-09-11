@@ -187,6 +187,22 @@ const testimonials = [
 function Index() {
   const [active, setActive] = useState(0);
   const [tick, setTick] = useState(0);
+  const [time, setTime] = useState("");
+
+  useEffect(() => {
+    const update = () =>
+      setTime(
+        new Intl.DateTimeFormat("en-US", {
+          hour: "numeric",
+          minute: "2-digit",
+          hour12: true,
+          timeZone: "Asia/Kolkata",
+        }).format(new Date()) + " GMT+5:30",
+      );
+    update();
+    const id = setInterval(update, 30_000);
+    return () => clearInterval(id);
+  }, []);
   const t = testimonials[active]!;
 
   const go = (dir: 1 | -1) => {
