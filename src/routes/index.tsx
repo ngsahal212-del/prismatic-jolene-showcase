@@ -62,6 +62,15 @@ const credentials = [
   },
 ];
 
+const projects = [
+  { img: proj01, name: "Jessica Webster", category: "eCommerce", year: "2026" },
+  { img: proj02, name: "Daka Expeditions", category: "Hospitality", year: "2025" },
+  { img: proj03, name: "Samsar Battery", category: "Technology", year: "2024" },
+  { img: proj04, name: "Vanguard Studio", category: "Architecture", year: "2024" },
+  { img: proj05, name: "Nordic Form", category: "Interior Design", year: "2023" },
+  { img: proj06, name: "Shootsy.io", category: "SaaS", year: "2022" },
+];
+
 function Index() {
   return (
     <main className="bg-neutral-950">
