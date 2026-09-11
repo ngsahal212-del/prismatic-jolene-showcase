@@ -108,53 +108,109 @@ const services = [
   },
 ];
 
-const plans: { name: string; blurb: string; price: string; features: string[]; dark?: boolean }[] = [
+type PlanMode = { price: string; features: string[] };
+type Plan = { name: string; blurb: string; dark?: boolean; dev: PlanMode; full: PlanMode };
+
+const plans: Plan[] = [
   {
     name: "Landing Page",
-    blurb: "A polished custom landing page designed and developed for businesses that need a focused, high-performing online presence.",
-    price: "€1,400",
-    features: [
-      "Development from a completed, build-ready Figma file",
-      "Responsive development in Framer or Wix Studio",
-      "Clean and consistent page build",
-      "Forms, links, interactions, and core functionality",
-      "Basic SEO and performance setup",
-      "Pre-launch testing, refinement, and launch support",
-    ],
+    blurb:
+      "A polished custom landing page designed and developed for businesses that need a focused, high-performing online presence.",
+    dev: {
+      price: "€1,400",
+      features: [
+        "Development from a completed, build-ready Figma file",
+        "Responsive development in Framer or Wix Studio",
+        "Clean and consistent page build",
+        "Forms, links, interactions, and core functionality",
+        "Basic SEO and performance setup",
+        "Pre-launch testing, refinement, and launch support",
+      ],
+    },
+    full: {
+      price: "€2,400",
+      features: [
+        "Discovery session to clarify goals and requirements",
+        "Conversion-focused strategy and page planning",
+        "Content guidance and messaging review",
+        "Custom landing page design in Figma",
+        "Custom visual direction aligned with your brand",
+        "Responsive development in Framer or Wix Studio",
+        "Structured layout, typography, and visual hierarchy",
+        "Forms, links, interactions, and core site functionality",
+        "Basic SEO and performance setup",
+        "Pre-launch testing, refinement, and launch support",
+      ],
+    },
   },
   {
     name: "Multi-Page Website",
-    blurb: "A multi-page custom website for businesses that need more content space, stronger structure, and optional simple CMS setup.",
-    price: "€3,400",
-    features: [
-      "Development from a completed, build-ready Figma file",
-      "Responsive development in Framer or Wix Studio",
-      "Clean and consistent multi-page build",
-      "Forms, links, interactions, and core site functionality",
-      "Simple CMS setup where needed",
-      "Basic SEO and performance setup",
-      "Pre-launch testing, refinement, and launch support",
-    ],
+    blurb:
+      "A multi-page custom website for businesses that need more content space, stronger structure, and optional simple CMS setup.",
+    dev: {
+      price: "€3,400",
+      features: [
+        "Development from a completed, build-ready Figma file",
+        "Responsive development in Framer or Wix Studio",
+        "Clean and consistent multi-page build",
+        "Forms, links, interactions, and core site functionality",
+        "Simple CMS setup where needed",
+        "Basic SEO and performance setup",
+        "Pre-launch testing, refinement, and launch support",
+      ],
+    },
+    full: {
+      price: "€5,400",
+      features: [
+        "Discovery session to clarify goals and requirements",
+        "Conversion-focused strategy and page planning",
+        "Content guidance and messaging review",
+        "Custom website design in Figma",
+        "Custom visual direction aligned with your brand",
+        "Responsive development in Framer or Wix Studio",
+        "Structured layout, typography, and visual hierarchy",
+        "Forms, links, interactions, and core site functionality",
+        "Simple CMS setup where needed",
+        "Basic SEO and performance setup",
+        "Pre-launch testing, refinement, and launch support",
+      ],
+    },
   },
   {
     name: "Advanced Website",
-    blurb: "For larger websites and more complex projects with advanced CMS setups, added functionality, and custom code components.",
-    price: "€8,500",
+    blurb:
+      "For larger websites and more complex projects with advanced CMS setups, added functionality, and custom code components.",
     dark: true,
-    features: [
-      "Discovery session to clarify goals and requirements",
-      "Conversion-focused strategy and page planning",
-      "Content guidance and messaging review",
-      "Custom website design in Figma",
-      "Custom visual direction aligned with your brand",
-      "Responsive development in Framer or Wix Studio",
-      "Structured layout, typography, and visual hierarchy",
-      "Forms, links, interactions, and core site functionality",
-      "Advanced CMS setup and content organisation",
-      "Custom code components where required",
-      "Basic SEO and performance setup",
-      "Pre-launch testing, refinement, and launch support",
-    ],
+    dev: {
+      price: "€6,500",
+      features: [
+        "Development from a completed, build-ready Figma file",
+        "Responsive development in Framer or Wix Studio",
+        "Clean and consistent multi-page build",
+        "Forms, links, interactions, and core site functionality",
+        "Advanced CMS setup and content organisation",
+        "Custom code components where required",
+        "Basic SEO and performance setup",
+        "Pre-launch testing, refinement, and launch support",
+      ],
+    },
+    full: {
+      price: "€8,500",
+      features: [
+        "Discovery session to clarify goals and requirements",
+        "Conversion-focused strategy and page planning",
+        "Content guidance and messaging review",
+        "Custom website design in Figma",
+        "Custom visual direction aligned with your brand",
+        "Responsive development in Framer or Wix Studio",
+        "Structured layout, typography, and visual hierarchy",
+        "Forms, links, interactions, and core site functionality",
+        "Advanced CMS setup and content organisation",
+        "Custom code components where required",
+        "Basic SEO and performance setup",
+        "Pre-launch testing, refinement, and launch support",
+      ],
+    },
   },
 ];
 
@@ -240,20 +296,20 @@ function Index() {
               Koekemoer
             </h1>
 
-            <div className="w-full max-w-sm md:text-right">
+            <div className="w-full max-w-md text-right">
               <svg
                 viewBox="0 0 48 48"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="1.25"
-                className="mb-5 h-11 w-11 text-white md:ml-auto"
+                className="animate-spin-globe mb-8 h-11 w-11 text-white"
                 aria-hidden="true"
               >
                 <circle cx="24" cy="24" r="17" />
                 <ellipse cx="24" cy="24" rx="7.5" ry="17" />
                 <path d="M7 24h34M10 14.5h28M10 33.5h28" />
               </svg>
-              <p className="text-sm leading-snug font-medium text-white md:text-base">
+              <p className="text-right text-sm leading-snug font-semibold text-white md:text-base">
                 Professional website designer and developer creating modern, user-friendly websites
                 built for visibility, usability, and performance.
               </p>
@@ -263,13 +319,16 @@ function Index() {
       </section>
 
       {/* About */}
-      <section className="w-full border-t border-white/10 bg-neutral-950 px-6 py-12 md:px-10 md:py-16">
+      <section className="w-full border-t border-white/10 bg-neutral-950 px-6 py-12 md:px-14 md:py-16">
         <div className="flex items-start justify-between">
           <span className="text-xs font-semibold tracking-wide text-white">(01)</span>
           <span className="text-xs font-semibold tracking-wide text-white">About</span>
         </div>
 
-        <h2 className="mt-14 max-w-6xl text-[9vw] font-bold leading-[1.02] tracking-[-0.03em] text-white md:mt-20 md:text-[4.6vw]">
+        <h2
+          className="mt-10 max-w-6xl text-[9vw] font-bold leading-[1.02] tracking-[-0.03em] text-white md:mt-12 md:text-[4.6vw]"
+          style={{ textIndent: "9%" }}
+        >
           I’m Jo, a website designer and no-code developer with over a decade of experience,
           specialising in clean, scalable website design in Framer and Wix Studio.
         </h2>
@@ -317,12 +376,12 @@ function Index() {
 
       {/* (02) Portfolio */}
       <section id="portfolio" className="w-full bg-white text-black">
-        <div className="flex items-center justify-between border-t border-black/15 px-6 py-4 text-xs md:px-10">
+        <div className="flex items-center justify-between border-t border-black/15 px-6 py-4 text-xs md:px-14">
           <span>(02)</span>
           <span>Portfolio</span>
         </div>
 
-        <div className="grid grid-cols-1 gap-10 px-6 pb-32 md:grid-cols-[1fr_1.4fr] md:gap-16 md:px-10">
+        <div className="grid grid-cols-1 gap-10 px-6 pb-10 md:grid-cols-[1fr_1.4fr] md:gap-16 md:px-14 md:pb-12">
           <div className="md:sticky md:top-24 md:h-fit md:self-start md:pt-16">
             <h2 className="text-5xl font-semibold tracking-tight md:text-6xl">Portfolio</h2>
             <p className="mt-1 text-lg text-black/70">2022–2026</p>
@@ -359,13 +418,13 @@ function Index() {
 
       {/* (03) Services */}
       <section id="services" className="w-full bg-neutral-950 text-white">
-        <div className="flex items-center justify-between border-t border-white/15 px-6 py-4 text-xs font-semibold md:px-10">
+        <div className="flex items-center justify-between border-t border-white/15 px-6 py-4 text-xs font-semibold md:px-14">
           <span>(03)</span>
           <span>Services</span>
         </div>
 
         {/* Intro */}
-        <div className="flex flex-col gap-10 px-6 pt-14 pb-24 md:flex-row md:items-start md:gap-16 md:px-10 md:pt-20 md:pb-32">
+        <div className="flex flex-col gap-10 px-6 pt-14 pb-24 md:flex-row md:items-start md:gap-16 md:px-14 md:pt-20 md:pb-32">
           <img
             src={portrait}
             alt="Grayscale portrait of Jolene Koekemoer"
@@ -380,12 +439,13 @@ function Index() {
           </h2>
         </div>
 
-        {/* Stages */}
+        {/* Stages — stack on scroll */}
         <div>
-          {services.map((s) => (
+          {services.map((s, i) => (
             <div
               key={s.n}
-              className="grid gap-10 border-t border-white/15 px-6 py-16 md:grid-cols-[1fr_1.2fr_1fr] md:gap-16 md:px-10 md:py-24"
+              className="sticky top-0 grid gap-10 border-t border-white/15 bg-neutral-950 px-6 py-16 md:grid-cols-[1fr_1.2fr_1fr] md:gap-16 md:px-14 md:py-24"
+              style={{ zIndex: i + 1 }}
             >
               <div>
                 <span className="text-sm font-semibold text-white">{s.n}</span>
@@ -410,7 +470,7 @@ function Index() {
         </div>
 
         {/* Template-based projects */}
-        <div className="grid gap-6 border-t border-white/15 px-6 py-16 md:grid-cols-[1fr_1.2fr_1fr] md:gap-16 md:px-10 md:py-24">
+        <div className="relative z-20 grid gap-6 border-t border-white/15 bg-neutral-950 px-6 py-16 md:grid-cols-[1fr_1.2fr_1fr] md:gap-16 md:px-14 md:py-24">
           <h3 className="text-base font-semibold text-white md:col-start-1">Template-Based Projects</h3>
           <p className="max-w-md text-sm leading-relaxed text-white/55 md:col-start-2">
             Alongside custom website projects, I also offer{" "}
@@ -422,14 +482,14 @@ function Index() {
 
       {/* (04) Testimonials */}
       <section id="testimonials" className="w-full bg-white text-black">
-        <div className="flex items-center justify-between border-t border-black/15 px-6 py-4 text-xs md:px-10">
+        <div className="flex items-center justify-between border-t border-black/15 px-6 py-4 text-xs md:px-14">
           <span>(04)</span>
           <span>Testimonials</span>
         </div>
 
         <div
           key={tick}
-          className="grid animate-fade-in gap-10 px-6 py-16 md:grid-cols-[auto_1fr] md:gap-24 md:px-10 md:py-24"
+          className="grid animate-fade-in gap-10 px-6 py-16 md:grid-cols-[auto_1fr] md:gap-24 md:px-14 md:py-24"
         >
           <div className="flex flex-col gap-6">
             <img
@@ -476,55 +536,19 @@ function Index() {
 
       {/* (05) Estimates */}
       <section id="estimates" className="w-full bg-white text-black">
-        <div className="flex items-center justify-between border-t border-black/15 px-6 py-4 text-xs md:px-10">
+        <div className="flex items-center justify-between border-t border-black/15 px-6 py-4 text-xs md:px-14">
           <span>(05)</span>
           <span>Estimates</span>
         </div>
 
-        <div className="grid gap-4 px-6 pb-10 pt-10 md:grid-cols-3 md:px-10 md:pt-14">
+        <div className="grid items-start gap-4 px-6 pb-12 pt-10 md:grid-cols-3 md:px-14 md:pt-14">
           {plans.map((p) => (
-            <div
-              key={p.name}
-              className={`flex flex-col rounded-xl p-7 md:p-8 ${
-                p.dark ? "bg-[#0c0c0c] text-white" : "bg-black/[0.045] text-black"
-              }`}
-            >
-              <h3 className="text-base font-semibold tracking-[-0.01em]">{p.name}</h3>
-              <p className={`mt-3 text-sm leading-relaxed ${p.dark ? "text-white/55" : "text-black/45"}`}>
-                {p.blurb}
-              </p>
-
-              <p className="mt-10 flex items-baseline gap-1.5 md:mt-14">
-                <span className="text-5xl font-bold tracking-[-0.03em]">{p.price}</span>
-                <span className="text-sm font-medium">
-                  <sup>+</sup>/website
-                </span>
-              </p>
-
-              <div className="mt-6 flex flex-wrap gap-2">
-                <span className={`rounded-md px-3 py-1.5 text-xs font-semibold ${p.dark ? "bg-white text-black" : "bg-black text-white"}`}>
-                  Development
-                </span>
-                <span className={`rounded-md border px-3 py-1.5 text-xs font-medium ${p.dark ? "border-white/25 text-white/85" : "border-black/20 text-black/70"}`}>
-                  Design + Development
-                </span>
-              </div>
-
-              <p className="mt-9 text-sm font-semibold">What's included</p>
-              <ul className="mt-4 flex flex-col gap-2.5">
-                {p.features.map((f) => (
-                  <li key={f} className={`flex gap-2.5 text-sm ${p.dark ? "text-white/65" : "text-black/50"}`}>
-                    <span className="mt-0.5">+</span>
-                    <span>{f}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <PlanCard key={p.name} plan={p} />
           ))}
         </div>
 
-        <div className="flex flex-col gap-3 px-6 pb-14 md:flex-row md:items-start md:gap-16 md:px-10">
-          <p className="shrink-0 text-sm font-semibold md:w-64">Custom quotes and add-ons</p>
+        <div className="mx-6 flex flex-col gap-3 border-t border-black/10 py-10 pb-16 md:mx-14 md:flex-row md:items-start md:gap-16">
+          <p className="shrink-0 text-sm font-semibold md:w-72">Custom quotes and add-ons</p>
           <p className="max-w-3xl text-sm leading-relaxed text-black/45">
             These prices are general estimates based on typical custom website scopes.{" "}
             <span className="font-semibold text-black">Framer template</span> customisation, branding, copywriting, and
@@ -536,5 +560,61 @@ function Index() {
 
       <SiteClosing />
     </main>
+  );
+}
+
+function PlanCard({ plan }: { plan: Plan }) {
+  const [mode, setMode] = useState<"dev" | "full">("full");
+  const dark = plan.dark;
+  const current = plan[mode];
+
+  const pill = (key: "dev" | "full", label: string) => {
+    const activePill = mode === key;
+    const base = "rounded-md px-3 py-1.5 text-xs transition-all duration-200 active:scale-95";
+    const styles = activePill
+      ? dark
+        ? "bg-white font-semibold text-black"
+        : "bg-black font-semibold text-white"
+      : dark
+        ? "border border-white/25 font-medium text-white/85 hover:bg-white/10"
+        : "border border-black/20 font-medium text-black/70 hover:bg-black/5";
+    return (
+      <button type="button" onClick={() => setMode(key)} aria-pressed={activePill} className={`${base} ${styles}`}>
+        {label}
+      </button>
+    );
+  };
+
+  return (
+    <div
+      className={`flex flex-col rounded-xl p-7 md:p-8 ${
+        dark ? "bg-[#0c0c0c] text-white" : "bg-black/[0.045] text-black"
+      }`}
+    >
+      <h3 className="text-base font-semibold tracking-[-0.01em]">{plan.name}</h3>
+      <p className={`mt-3 text-sm leading-relaxed ${dark ? "text-white/55" : "text-black/45"}`}>{plan.blurb}</p>
+
+      <p key={current.price} className="mt-10 flex animate-fade-in items-baseline gap-1.5 md:mt-14">
+        <span className="text-5xl font-bold tracking-[-0.03em]">{current.price}</span>
+        <span className="text-sm font-medium">
+          <sup>+</sup>/website
+        </span>
+      </p>
+
+      <div className="mt-6 flex flex-wrap gap-2">
+        {pill("dev", "Development")}
+        {pill("full", "Design + Development")}
+      </div>
+
+      <p className="mt-9 text-sm font-semibold">What's included</p>
+      <ul key={mode} className="mt-4 flex animate-fade-in flex-col gap-2.5">
+        {current.features.map((f) => (
+          <li key={f} className={`flex gap-2.5 text-sm ${dark ? "text-white/65" : "text-black/50"}`}>
+            <span className="mt-0.5">+</span>
+            <span>{f}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }

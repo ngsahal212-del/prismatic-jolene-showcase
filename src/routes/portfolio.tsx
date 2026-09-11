@@ -48,7 +48,7 @@ function PortfolioPage() {
   return (
     <main className="min-h-screen w-full bg-white text-black">
       {/* Header */}
-      <header className="flex items-center justify-between px-6 py-5 md:px-10">
+      <header className="flex items-center justify-between px-6 py-5 md:px-14">
         <Link to="/" className="text-sm font-medium tracking-tight">
           © J — K
         </Link>
@@ -63,7 +63,7 @@ function PortfolioPage() {
       </header>
 
       {/* Title block */}
-      <section className="px-6 pb-10 pt-24 md:px-10 md:pt-40">
+      <section className="px-6 pb-10 pt-24 md:px-14 md:pt-40">
         <p className="text-xs text-black/60">(02)</p>
         <div className="mt-2 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <h1 className="text-[13vw] font-semibold leading-[0.95] tracking-[-0.03em] md:text-[6.5vw]">
@@ -79,7 +79,7 @@ function PortfolioPage() {
       </section>
 
       {/* Work grid */}
-      <section className="grid gap-x-4 gap-y-10 px-6 pb-20 md:grid-cols-2 md:px-10">
+      <section className="grid gap-x-4 gap-y-10 px-6 pb-20 md:grid-cols-2 md:px-14">
         {works.map((w, i) => (
           <article key={w.name} className="group">
             <div className="overflow-hidden rounded-lg">
