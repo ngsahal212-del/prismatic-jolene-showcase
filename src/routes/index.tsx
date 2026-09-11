@@ -401,7 +401,7 @@ function Index() {
       </motion.section>
 
       {/* (02) Portfolio */}
-      <section id="portfolio" className="w-full bg-white text-black">
+      <section id="portfolio" className="relative z-10 w-full bg-white text-black">
         <div className="flex items-center justify-between border-t border-black/15 px-6 py-4 text-xs md:px-14">
           <span>(02)</span>
           <span>Portfolio</span>
@@ -443,7 +443,7 @@ function Index() {
       </section>
 
       {/* (03) Services */}
-      <section id="services" className="w-full bg-neutral-950 text-white">
+      <section id="services" className="relative z-10 w-full bg-neutral-950 text-white">
         <div className="flex items-center justify-between border-t border-white/15 px-6 py-4 text-xs font-semibold md:px-14">
           <span>(03)</span>
           <span>Services</span>
@@ -507,7 +507,7 @@ function Index() {
       </section>
 
       {/* (04) Testimonials */}
-      <section id="testimonials" className="w-full bg-white text-black">
+      <section id="testimonials" className="relative z-10 w-full bg-white text-black">
         <div className="flex items-center justify-between border-t border-black/15 px-6 py-4 text-xs md:px-14">
           <span>(04)</span>
           <span>Testimonials</span>
@@ -561,7 +561,7 @@ function Index() {
       </section>
 
       {/* (05) Estimates */}
-      <section id="estimates" className="w-full bg-white text-black">
+      <section id="estimates" className="relative z-10 w-full bg-white text-black">
         <div className="flex items-center justify-between border-t border-black/15 px-6 py-4 text-xs md:px-14">
           <span>(05)</span>
           <span>Estimates</span>
@@ -584,7 +584,9 @@ function Index() {
         </div>
       </section>
 
-      <SiteClosing />
+      <div className="relative z-10">
+        <SiteClosing />
+      </div>
     </main>
   );
 }
