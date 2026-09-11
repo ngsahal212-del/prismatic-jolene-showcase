@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { createFileRoute } from "@tanstack/react-router";
 
+import { SiteClosing } from "@/components/SiteClosing";
 import fluted from "@/assets/fluted-glass.jpg";
 import portrait from "@/assets/portrait-jo.jpg";
 import proj01 from "@/assets/proj-01.jpg";
