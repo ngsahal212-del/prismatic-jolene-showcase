@@ -41,7 +41,7 @@ const works = [
 const nav = [
   { label: "Home", index: "01", to: "/" },
   { label: "Portfolio", index: "02", to: "/portfolio" },
-  { label: "Contact", index: "03", to: "/#contact" },
+  { label: "Contact", index: "03", to: "/contact" },
 ];
 
 function PortfolioPage() {
