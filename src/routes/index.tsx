@@ -192,6 +192,48 @@ function Index() {
           ))}
         </div>
       </section>
+
+      {/* (02) Portfolio */}
+      <section id="portfolio" className="w-full bg-white text-black">
+        <div className="flex items-center justify-between border-t border-black/15 px-6 py-4 text-xs md:px-10">
+          <span>(02)</span>
+          <span>Portfolio</span>
+        </div>
+
+        <div className="grid grid-cols-1 gap-10 px-6 pb-32 md:grid-cols-[1fr_1.4fr] md:gap-16 md:px-10">
+          <div className="md:sticky md:top-24 md:h-fit md:self-start md:pt-16">
+            <h2 className="text-5xl font-semibold tracking-tight md:text-6xl">Portfolio</h2>
+            <p className="mt-1 text-lg text-black/70">2022–2026</p>
+          </div>
+
+          <div className="pt-8 md:pt-16">
+            {projects.map((p, i) => (
+              <article
+                key={p.name}
+                className="sticky bg-white pb-6"
+                style={{ top: `${80 + i * 18}px`, zIndex: i + 1 }}
+              >
+                <img
+                  src={p.img}
+                  alt={`${p.name} website mockup`}
+                  loading="lazy"
+                  width={1600}
+                  height={1000}
+                  className="w-full rounded-xl object-cover shadow-[0_-8px_30px_rgba(0,0,0,0.12)]"
+                />
+                <div className="mt-3 grid grid-cols-3 items-start text-xs">
+                  <span>({String(i + 1).padStart(2, "0")})</span>
+                  <span className="justify-self-center text-center">
+                    <span className="block font-semibold">{p.name}</span>
+                    <span className="block text-black/45">{p.category}</span>
+                  </span>
+                  <span className="justify-self-end">{p.year}</span>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
     </main>
   );
 }
