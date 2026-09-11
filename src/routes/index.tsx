@@ -1,6 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import fluted from "@/assets/fluted-glass.jpg";
 import portrait from "@/assets/portrait-jo.jpg";
+import proj01 from "@/assets/proj-01.jpg";
+import proj02 from "@/assets/proj-02.jpg";
+import proj03 from "@/assets/proj-03.jpg";
+import proj04 from "@/assets/proj-04.jpg";
+import proj05 from "@/assets/proj-05.jpg";
+import proj06 from "@/assets/proj-06.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -54,6 +60,15 @@ const credentials = [
     text: "100% Job Success, 100+ Projects, Top-Rated Since 2016",
     icon: <span className="text-2xl font-bold leading-none">Up</span>,
   },
+];
+
+const projects = [
+  { img: proj01, name: "Jessica Webster", category: "eCommerce", year: "2026" },
+  { img: proj02, name: "Daka Expeditions", category: "Hospitality", year: "2025" },
+  { img: proj03, name: "Samsar Battery", category: "Technology", year: "2024" },
+  { img: proj04, name: "Vanguard Studio", category: "Architecture", year: "2024" },
+  { img: proj05, name: "Nordic Form", category: "Interior Design", year: "2023" },
+  { img: proj06, name: "Shootsy.io", category: "SaaS", year: "2022" },
 ];
 
 function Index() {
@@ -175,6 +190,48 @@ function Index() {
               <p className="mt-1 max-w-xs text-sm leading-snug text-white/55">{c.text}</p>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* (02) Portfolio */}
+      <section id="portfolio" className="w-full bg-white text-black">
+        <div className="flex items-center justify-between border-t border-black/15 px-6 py-4 text-xs md:px-10">
+          <span>(02)</span>
+          <span>Portfolio</span>
+        </div>
+
+        <div className="grid grid-cols-1 gap-10 px-6 pb-32 md:grid-cols-[1fr_1.4fr] md:gap-16 md:px-10">
+          <div className="md:sticky md:top-24 md:h-fit md:self-start md:pt-16">
+            <h2 className="text-5xl font-semibold tracking-tight md:text-6xl">Portfolio</h2>
+            <p className="mt-1 text-lg text-black/70">2022–2026</p>
+          </div>
+
+          <div className="pt-8 md:pt-16">
+            {projects.map((p, i) => (
+              <article
+                key={p.name}
+                className="sticky bg-white pb-6"
+                style={{ top: `${80 + i * 18}px`, zIndex: i + 1 }}
+              >
+                <img
+                  src={p.img}
+                  alt={`${p.name} website mockup`}
+                  loading="lazy"
+                  width={1600}
+                  height={1000}
+                  className="w-full rounded-xl object-cover shadow-[0_-8px_30px_rgba(0,0,0,0.12)]"
+                />
+                <div className="mt-3 grid grid-cols-3 items-start text-xs">
+                  <span>({String(i + 1).padStart(2, "0")})</span>
+                  <span className="justify-self-center text-center">
+                    <span className="block font-semibold">{p.name}</span>
+                    <span className="block text-black/45">{p.category}</span>
+                  </span>
+                  <span className="justify-self-end">{p.year}</span>
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
     </main>
