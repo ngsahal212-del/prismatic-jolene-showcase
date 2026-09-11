@@ -240,20 +240,20 @@ function Index() {
               Koekemoer
             </h1>
 
-            <div className="w-full max-w-sm md:text-right">
+            <div className="w-full max-w-md text-right">
               <svg
                 viewBox="0 0 48 48"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="1.25"
-                className="mb-5 h-11 w-11 text-white md:ml-auto"
+                className="animate-spin-globe mb-8 h-11 w-11 text-white"
                 aria-hidden="true"
               >
                 <circle cx="24" cy="24" r="17" />
                 <ellipse cx="24" cy="24" rx="7.5" ry="17" />
                 <path d="M7 24h34M10 14.5h28M10 33.5h28" />
               </svg>
-              <p className="text-sm leading-snug font-medium text-white md:text-base">
+              <p className="text-right text-sm leading-snug font-semibold text-white md:text-base">
                 Professional website designer and developer creating modern, user-friendly websites
                 built for visibility, usability, and performance.
               </p>
@@ -269,7 +269,10 @@ function Index() {
           <span className="text-xs font-semibold tracking-wide text-white">About</span>
         </div>
 
-        <h2 className="mt-14 max-w-6xl text-[9vw] font-bold leading-[1.02] tracking-[-0.03em] text-white md:mt-20 md:text-[4.6vw]">
+        <h2
+          className="mt-10 max-w-6xl text-[9vw] font-bold leading-[1.02] tracking-[-0.03em] text-white md:mt-12 md:text-[4.6vw]"
+          style={{ textIndent: "9%" }}
+        >
           I’m Jo, a website designer and no-code developer with over a decade of experience,
           specialising in clean, scalable website design in Framer and Wix Studio.
         </h2>
