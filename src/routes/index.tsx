@@ -562,3 +562,59 @@ function Index() {
     </main>
   );
 }
+
+function PlanCard({ plan }: { plan: Plan }) {
+  const [mode, setMode] = useState<"dev" | "full">("full");
+  const dark = plan.dark;
+  const current = plan[mode];
+
+  const pill = (key: "dev" | "full", label: string) => {
+    const activePill = mode === key;
+    const base = "rounded-md px-3 py-1.5 text-xs transition-all duration-200 active:scale-95";
+    const styles = activePill
+      ? dark
+        ? "bg-white font-semibold text-black"
+        : "bg-black font-semibold text-white"
+      : dark
+        ? "border border-white/25 font-medium text-white/85 hover:bg-white/10"
+        : "border border-black/20 font-medium text-black/70 hover:bg-black/5";
+    return (
+      <button type="button" onClick={() => setMode(key)} aria-pressed={activePill} className={`${base} ${styles}`}>
+        {label}
+      </button>
+    );
+  };
+
+  return (
+    <div
+      className={`flex flex-col rounded-xl p-7 md:p-8 ${
+        dark ? "bg-[#0c0c0c] text-white" : "bg-black/[0.045] text-black"
+      }`}
+    >
+      <h3 className="text-base font-semibold tracking-[-0.01em]">{plan.name}</h3>
+      <p className={`mt-3 text-sm leading-relaxed ${dark ? "text-white/55" : "text-black/45"}`}>{plan.blurb}</p>
+
+      <p key={current.price} className="mt-10 flex animate-fade-in items-baseline gap-1.5 md:mt-14">
+        <span className="text-5xl font-bold tracking-[-0.03em]">{current.price}</span>
+        <span className="text-sm font-medium">
+          <sup>+</sup>/website
+        </span>
+      </p>
+
+      <div className="mt-6 flex flex-wrap gap-2">
+        {pill("dev", "Development")}
+        {pill("full", "Design + Development")}
+      </div>
+
+      <p className="mt-9 text-sm font-semibold">What's included</p>
+      <ul key={mode} className="mt-4 flex animate-fade-in flex-col gap-2.5">
+        {current.features.map((f) => (
+          <li key={f} className={`flex gap-2.5 text-sm ${dark ? "text-white/65" : "text-black/50"}`}>
+            <span className="mt-0.5">+</span>
+            <span>{f}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
