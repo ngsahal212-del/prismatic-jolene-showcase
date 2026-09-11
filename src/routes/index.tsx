@@ -325,7 +325,7 @@ function Index() {
           <span>Portfolio</span>
         </div>
 
-        <div className="grid grid-cols-1 gap-10 px-6 pb-32 md:grid-cols-[1fr_1.4fr] md:gap-16 md:px-14">
+        <div className="grid grid-cols-1 gap-10 px-6 pb-10 md:grid-cols-[1fr_1.4fr] md:gap-16 md:px-14 md:pb-12">
           <div className="md:sticky md:top-24 md:h-fit md:self-start md:pt-16">
             <h2 className="text-5xl font-semibold tracking-tight md:text-6xl">Portfolio</h2>
             <p className="mt-1 text-lg text-black/70">2022–2026</p>
@@ -383,12 +383,13 @@ function Index() {
           </h2>
         </div>
 
-        {/* Stages */}
+        {/* Stages — stack on scroll */}
         <div>
-          {services.map((s) => (
+          {services.map((s, i) => (
             <div
               key={s.n}
-              className="grid gap-10 border-t border-white/15 px-6 py-16 md:grid-cols-[1fr_1.2fr_1fr] md:gap-16 md:px-14 md:py-24"
+              className="sticky top-0 grid gap-10 border-t border-white/15 bg-neutral-950 px-6 py-16 md:grid-cols-[1fr_1.2fr_1fr] md:gap-16 md:px-14 md:py-24"
+              style={{ zIndex: i + 1 }}
             >
               <div>
                 <span className="text-sm font-semibold text-white">{s.n}</span>
