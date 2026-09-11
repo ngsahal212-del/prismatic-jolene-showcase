@@ -108,53 +108,109 @@ const services = [
   },
 ];
 
-const plans: { name: string; blurb: string; price: string; features: string[]; dark?: boolean }[] = [
+type PlanMode = { price: string; features: string[] };
+type Plan = { name: string; blurb: string; dark?: boolean; dev: PlanMode; full: PlanMode };
+
+const plans: Plan[] = [
   {
     name: "Landing Page",
-    blurb: "A polished custom landing page designed and developed for businesses that need a focused, high-performing online presence.",
-    price: "€1,400",
-    features: [
-      "Development from a completed, build-ready Figma file",
-      "Responsive development in Framer or Wix Studio",
-      "Clean and consistent page build",
-      "Forms, links, interactions, and core functionality",
-      "Basic SEO and performance setup",
-      "Pre-launch testing, refinement, and launch support",
-    ],
+    blurb:
+      "A polished custom landing page designed and developed for businesses that need a focused, high-performing online presence.",
+    dev: {
+      price: "€1,400",
+      features: [
+        "Development from a completed, build-ready Figma file",
+        "Responsive development in Framer or Wix Studio",
+        "Clean and consistent page build",
+        "Forms, links, interactions, and core functionality",
+        "Basic SEO and performance setup",
+        "Pre-launch testing, refinement, and launch support",
+      ],
+    },
+    full: {
+      price: "€2,400",
+      features: [
+        "Discovery session to clarify goals and requirements",
+        "Conversion-focused strategy and page planning",
+        "Content guidance and messaging review",
+        "Custom landing page design in Figma",
+        "Custom visual direction aligned with your brand",
+        "Responsive development in Framer or Wix Studio",
+        "Structured layout, typography, and visual hierarchy",
+        "Forms, links, interactions, and core site functionality",
+        "Basic SEO and performance setup",
+        "Pre-launch testing, refinement, and launch support",
+      ],
+    },
   },
   {
     name: "Multi-Page Website",
-    blurb: "A multi-page custom website for businesses that need more content space, stronger structure, and optional simple CMS setup.",
-    price: "€3,400",
-    features: [
-      "Development from a completed, build-ready Figma file",
-      "Responsive development in Framer or Wix Studio",
-      "Clean and consistent multi-page build",
-      "Forms, links, interactions, and core site functionality",
-      "Simple CMS setup where needed",
-      "Basic SEO and performance setup",
-      "Pre-launch testing, refinement, and launch support",
-    ],
+    blurb:
+      "A multi-page custom website for businesses that need more content space, stronger structure, and optional simple CMS setup.",
+    dev: {
+      price: "€3,400",
+      features: [
+        "Development from a completed, build-ready Figma file",
+        "Responsive development in Framer or Wix Studio",
+        "Clean and consistent multi-page build",
+        "Forms, links, interactions, and core site functionality",
+        "Simple CMS setup where needed",
+        "Basic SEO and performance setup",
+        "Pre-launch testing, refinement, and launch support",
+      ],
+    },
+    full: {
+      price: "€5,400",
+      features: [
+        "Discovery session to clarify goals and requirements",
+        "Conversion-focused strategy and page planning",
+        "Content guidance and messaging review",
+        "Custom website design in Figma",
+        "Custom visual direction aligned with your brand",
+        "Responsive development in Framer or Wix Studio",
+        "Structured layout, typography, and visual hierarchy",
+        "Forms, links, interactions, and core site functionality",
+        "Simple CMS setup where needed",
+        "Basic SEO and performance setup",
+        "Pre-launch testing, refinement, and launch support",
+      ],
+    },
   },
   {
     name: "Advanced Website",
-    blurb: "For larger websites and more complex projects with advanced CMS setups, added functionality, and custom code components.",
-    price: "€8,500",
+    blurb:
+      "For larger websites and more complex projects with advanced CMS setups, added functionality, and custom code components.",
     dark: true,
-    features: [
-      "Discovery session to clarify goals and requirements",
-      "Conversion-focused strategy and page planning",
-      "Content guidance and messaging review",
-      "Custom website design in Figma",
-      "Custom visual direction aligned with your brand",
-      "Responsive development in Framer or Wix Studio",
-      "Structured layout, typography, and visual hierarchy",
-      "Forms, links, interactions, and core site functionality",
-      "Advanced CMS setup and content organisation",
-      "Custom code components where required",
-      "Basic SEO and performance setup",
-      "Pre-launch testing, refinement, and launch support",
-    ],
+    dev: {
+      price: "€6,500",
+      features: [
+        "Development from a completed, build-ready Figma file",
+        "Responsive development in Framer or Wix Studio",
+        "Clean and consistent multi-page build",
+        "Forms, links, interactions, and core site functionality",
+        "Advanced CMS setup and content organisation",
+        "Custom code components where required",
+        "Basic SEO and performance setup",
+        "Pre-launch testing, refinement, and launch support",
+      ],
+    },
+    full: {
+      price: "€8,500",
+      features: [
+        "Discovery session to clarify goals and requirements",
+        "Conversion-focused strategy and page planning",
+        "Content guidance and messaging review",
+        "Custom website design in Figma",
+        "Custom visual direction aligned with your brand",
+        "Responsive development in Framer or Wix Studio",
+        "Structured layout, typography, and visual hierarchy",
+        "Forms, links, interactions, and core site functionality",
+        "Advanced CMS setup and content organisation",
+        "Custom code components where required",
+        "Basic SEO and performance setup",
+        "Pre-launch testing, refinement, and launch support",
+      ],
+    },
   },
 ];
 
@@ -414,7 +470,7 @@ function Index() {
         </div>
 
         {/* Template-based projects */}
-        <div className="grid gap-6 border-t border-white/15 px-6 py-16 md:grid-cols-[1fr_1.2fr_1fr] md:gap-16 md:px-14 md:py-24">
+        <div className="relative z-20 grid gap-6 border-t border-white/15 bg-neutral-950 px-6 py-16 md:grid-cols-[1fr_1.2fr_1fr] md:gap-16 md:px-14 md:py-24">
           <h3 className="text-base font-semibold text-white md:col-start-1">Template-Based Projects</h3>
           <p className="max-w-md text-sm leading-relaxed text-white/55 md:col-start-2">
             Alongside custom website projects, I also offer{" "}
