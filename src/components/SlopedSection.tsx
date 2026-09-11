@@ -1,4 +1,4 @@
-import { useRef, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 
@@ -29,15 +29,26 @@ export function SlopedSection({
     restDelta: 0.0005,
   });
 
+  // The panel is pulled up by SLOPE px, so scroll progress is already past 0
+  // at rest; start the animation from that offset to keep the first frame clean.
+  const [vh, setVh] = useState(0);
+  useEffect(() => {
+    const update = () => setVh(window.innerHeight);
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
+  const startAt = vh ? Math.min(SLOPE / vh, 0.4) : 0.15;
+
   const clipPath = useTransform(
     smooth,
-    [0, 1],
+    [startAt, 1],
     [
       `polygon(0% 0px, 100% ${SLOPE}px, 100% 100%, 0% 100%)`,
       `polygon(0% 0px, 100% 0px, 100% 100%, 0% 100%)`,
     ],
   );
-  const y = useTransform(smooth, [0, 1], [SLOPE, 0]);
+  const y = useTransform(smooth, [startAt, 1], [SLOPE, 0]);
 
   return (
     <motion.section
