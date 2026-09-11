@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import fluted from "@/assets/fluted-glass.jpg";
 
-export function SiteClosing() {
+export function SiteClosing({ showCta = true }: { showCta?: boolean }) {
   const [time, setTime] = useState("");
 
   useEffect(() => {
@@ -23,6 +23,7 @@ export function SiteClosing() {
   return (
     <>
       {/* CTA banner */}
+      {showCta && (
       <section id="contact" className="w-full bg-white px-4 pb-4 pt-2 md:px-6 md:pb-6">
         <div className="relative overflow-hidden rounded-2xl">
           <img
