@@ -107,7 +107,42 @@ const services = [
   },
 ];
 
+const testimonials = [
+  {
+    img: client01,
+    imgAlt: "Client working at a laptop behind a glass office wall",
+    quote:
+      "Working with Jolene is a pleasure. She clearly knows her field and consistently advises us with our best interest in mind. It’s reassuring to have someone so reliable and thoughtful on our side.",
+    name: "Stephanie Straatman",
+    company: "Voxdale BV",
+  },
+  {
+    img: client02,
+    imgAlt: "Smiling businesswoman with a laptop in a cafe",
+    quote:
+      "Jo took our vague ideas and turned them into a website that finally feels like us. The whole process was calm, clear, and faster than we expected.",
+    name: "Marié Botha",
+    company: "Botha & Co.",
+  },
+  {
+    img: client03,
+    imgAlt: "Designer reviewing sketches pinned to a studio wall",
+    quote:
+      "Every detail was considered, from the first sketch to launch day. Our new site loads fast, looks sharp, and our clients notice the difference.",
+    name: "Daniel Kruger",
+    company: "Kruger Studio",
+  },
+];
+
 function Index() {
+  const [active, setActive] = useState(0);
+  const [tick, setTick] = useState(0);
+  const t = testimonials[active];
+
+  const go = (dir: 1 | -1) => {
+    setActive((a) => (a + dir + testimonials.length) % testimonials.length);
+    setTick((k) => k + 1);
+  };
   return (
     <main className="bg-neutral-950">
       {/* Hero */}
