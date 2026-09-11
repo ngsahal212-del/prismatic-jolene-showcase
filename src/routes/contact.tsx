@@ -38,7 +38,7 @@ function ContactPage() {
   return (
     <main className="min-h-screen w-full bg-white text-black">
       {/* Header */}
-      <header className="flex items-center justify-between px-6 py-5 md:px-10">
+      <header className="flex items-center justify-between px-6 py-5 md:px-14">
         <Link to="/" className="text-sm font-medium tracking-tight">
           © J — K
         </Link>
@@ -57,7 +57,7 @@ function ContactPage() {
       </header>
 
       {/* Contact body */}
-      <section className="grid gap-12 px-6 pb-16 pt-16 md:grid-cols-[1fr_1.35fr] md:gap-24 md:px-10 md:pt-24">
+      <section className="grid gap-12 px-6 pb-16 pt-16 md:grid-cols-[1fr_1.35fr] md:gap-24 md:px-14 md:pt-24">
         {/* Left: details + portrait */}
         <div>
           <div className="text-sm leading-relaxed">

@@ -263,7 +263,7 @@ function Index() {
       </section>
 
       {/* About */}
-      <section className="w-full border-t border-white/10 bg-neutral-950 px-6 py-12 md:px-10 md:py-16">
+      <section className="w-full border-t border-white/10 bg-neutral-950 px-6 py-12 md:px-14 md:py-16">
         <div className="flex items-start justify-between">
           <span className="text-xs font-semibold tracking-wide text-white">(01)</span>
           <span className="text-xs font-semibold tracking-wide text-white">About</span>
@@ -317,12 +317,12 @@ function Index() {
 
       {/* (02) Portfolio */}
       <section id="portfolio" className="w-full bg-white text-black">
-        <div className="flex items-center justify-between border-t border-black/15 px-6 py-4 text-xs md:px-10">
+        <div className="flex items-center justify-between border-t border-black/15 px-6 py-4 text-xs md:px-14">
           <span>(02)</span>
           <span>Portfolio</span>
         </div>
 
-        <div className="grid grid-cols-1 gap-10 px-6 pb-32 md:grid-cols-[1fr_1.4fr] md:gap-16 md:px-10">
+        <div className="grid grid-cols-1 gap-10 px-6 pb-32 md:grid-cols-[1fr_1.4fr] md:gap-16 md:px-14">
           <div className="md:sticky md:top-24 md:h-fit md:self-start md:pt-16">
             <h2 className="text-5xl font-semibold tracking-tight md:text-6xl">Portfolio</h2>
             <p className="mt-1 text-lg text-black/70">2022–2026</p>
@@ -359,13 +359,13 @@ function Index() {
 
       {/* (03) Services */}
       <section id="services" className="w-full bg-neutral-950 text-white">
-        <div className="flex items-center justify-between border-t border-white/15 px-6 py-4 text-xs font-semibold md:px-10">
+        <div className="flex items-center justify-between border-t border-white/15 px-6 py-4 text-xs font-semibold md:px-14">
           <span>(03)</span>
           <span>Services</span>
         </div>
 
         {/* Intro */}
-        <div className="flex flex-col gap-10 px-6 pt-14 pb-24 md:flex-row md:items-start md:gap-16 md:px-10 md:pt-20 md:pb-32">
+        <div className="flex flex-col gap-10 px-6 pt-14 pb-24 md:flex-row md:items-start md:gap-16 md:px-14 md:pt-20 md:pb-32">
           <img
             src={portrait}
             alt="Grayscale portrait of Jolene Koekemoer"
@@ -385,7 +385,7 @@ function Index() {
           {services.map((s) => (
             <div
               key={s.n}
-              className="grid gap-10 border-t border-white/15 px-6 py-16 md:grid-cols-[1fr_1.2fr_1fr] md:gap-16 md:px-10 md:py-24"
+              className="grid gap-10 border-t border-white/15 px-6 py-16 md:grid-cols-[1fr_1.2fr_1fr] md:gap-16 md:px-14 md:py-24"
             >
               <div>
                 <span className="text-sm font-semibold text-white">{s.n}</span>
@@ -410,7 +410,7 @@ function Index() {
         </div>
 
         {/* Template-based projects */}
-        <div className="grid gap-6 border-t border-white/15 px-6 py-16 md:grid-cols-[1fr_1.2fr_1fr] md:gap-16 md:px-10 md:py-24">
+        <div className="grid gap-6 border-t border-white/15 px-6 py-16 md:grid-cols-[1fr_1.2fr_1fr] md:gap-16 md:px-14 md:py-24">
           <h3 className="text-base font-semibold text-white md:col-start-1">Template-Based Projects</h3>
           <p className="max-w-md text-sm leading-relaxed text-white/55 md:col-start-2">
             Alongside custom website projects, I also offer{" "}
@@ -422,14 +422,14 @@ function Index() {
 
       {/* (04) Testimonials */}
       <section id="testimonials" className="w-full bg-white text-black">
-        <div className="flex items-center justify-between border-t border-black/15 px-6 py-4 text-xs md:px-10">
+        <div className="flex items-center justify-between border-t border-black/15 px-6 py-4 text-xs md:px-14">
           <span>(04)</span>
           <span>Testimonials</span>
         </div>
 
         <div
           key={tick}
-          className="grid animate-fade-in gap-10 px-6 py-16 md:grid-cols-[auto_1fr] md:gap-24 md:px-10 md:py-24"
+          className="grid animate-fade-in gap-10 px-6 py-16 md:grid-cols-[auto_1fr] md:gap-24 md:px-14 md:py-24"
         >
           <div className="flex flex-col gap-6">
             <img
@@ -476,12 +476,12 @@ function Index() {
 
       {/* (05) Estimates */}
       <section id="estimates" className="w-full bg-white text-black">
-        <div className="flex items-center justify-between border-t border-black/15 px-6 py-4 text-xs md:px-10">
+        <div className="flex items-center justify-between border-t border-black/15 px-6 py-4 text-xs md:px-14">
           <span>(05)</span>
           <span>Estimates</span>
         </div>
 
-        <div className="grid gap-4 px-6 pb-10 pt-10 md:grid-cols-3 md:px-10 md:pt-14">
+        <div className="grid gap-4 px-6 pb-10 pt-10 md:grid-cols-3 md:px-14 md:pt-14">
           {plans.map((p) => (
             <div
               key={p.name}
@@ -523,7 +523,7 @@ function Index() {
           ))}
         </div>
 
-        <div className="flex flex-col gap-3 px-6 pb-14 md:flex-row md:items-start md:gap-16 md:px-10">
+        <div className="flex flex-col gap-3 px-6 pb-14 md:flex-row md:items-start md:gap-16 md:px-14">
           <p className="shrink-0 text-sm font-semibold md:w-64">Custom quotes and add-ons</p>
           <p className="max-w-3xl text-sm leading-relaxed text-black/45">
             These prices are general estimates based on typical custom website scopes.{" "}

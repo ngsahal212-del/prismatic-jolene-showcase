@@ -60,7 +60,7 @@ export function SiteClosing({ showCta = true }: { showCta?: boolean }) {
 
       {/* Footer */}
       <footer className="w-full bg-[#0c0c0c] text-white">
-        <div className="flex flex-col justify-between gap-10 px-6 pt-10 md:flex-row md:px-10">
+        <div className="flex flex-col justify-between gap-10 px-6 pt-10 md:flex-row md:px-14">
           <div className="flex items-start gap-3 text-white">
             <svg viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5" aria-hidden="true">
               <path d="M4 4h16l-8 8H4V4zm0 8h8l-8 8v-8zm8 0h8l-8 8 8-8z" fillRule="evenodd" />
@@ -106,7 +106,7 @@ export function SiteClosing({ showCta = true }: { showCta?: boolean }) {
           </nav>
         </div>
 
-        <div className="mt-16 px-6 md:mt-24 md:px-10">
+        <div className="mt-16 px-6 md:mt-24 md:px-14">
           <p className="text-[13vw] font-semibold leading-[0.95] tracking-[-0.03em] md:text-[8.5vw]">
             Jolene
             <br />
