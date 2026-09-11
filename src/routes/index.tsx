@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 
 import fluted from "@/assets/fluted-glass.jpg";
@@ -11,6 +12,9 @@ import proj06 from "@/assets/proj-06.jpg";
 import svc01 from "@/assets/svc-01.jpg";
 import svc02 from "@/assets/svc-02.jpg";
 import svc03 from "@/assets/svc-03.jpg";
+import client01 from "@/assets/client-01.jpg";
+import client02 from "@/assets/client-02.jpg";
+import client03 from "@/assets/client-03.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
