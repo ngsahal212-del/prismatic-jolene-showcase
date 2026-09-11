@@ -368,6 +368,60 @@ function Index() {
           </p>
         </div>
       </section>
+
+      {/* (04) Testimonials */}
+      <section id="testimonials" className="w-full bg-white text-black">
+        <div className="flex items-center justify-between border-t border-black/15 px-6 py-4 text-xs md:px-10">
+          <span>(04)</span>
+          <span>Testimonials</span>
+        </div>
+
+        <div
+          key={tick}
+          className="grid animate-fade-in gap-10 px-6 py-16 md:grid-cols-[auto_1fr] md:gap-24 md:px-10 md:py-24"
+        >
+          <div className="flex flex-col gap-6">
+            <img
+              src={t.img}
+              alt={t.imgAlt}
+              loading="lazy"
+              width={800}
+              height={800}
+              className="w-44 rounded-lg object-cover md:w-52"
+            />
+            <div>
+              <p className="text-sm font-semibold">{t.name}</p>
+              <p className="text-sm text-black/45">{t.company}</p>
+            </div>
+            <div className="mt-4 flex gap-3">
+              <button
+                type="button"
+                onClick={() => go(-1)}
+                aria-label="Previous testimonial"
+                className="flex h-12 w-12 items-center justify-center rounded-lg bg-black/5 text-black transition-all duration-200 hover:bg-black/10 active:scale-90"
+              >
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-4 w-4" aria-hidden="true">
+                  <path d="M15 6l-6 6 6 6" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
+              <button
+                type="button"
+                onClick={() => go(1)}
+                aria-label="Next testimonial"
+                className="flex h-12 w-12 items-center justify-center rounded-lg bg-black/5 text-black transition-all duration-200 hover:bg-black/10 active:scale-90"
+              >
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-4 w-4" aria-hidden="true">
+                  <path d="M9 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <blockquote className="max-w-4xl text-[6.5vw] font-semibold leading-[1.08] tracking-[-0.02em] md:text-[3.4vw]">
+            “{t.quote}”
+          </blockquote>
+        </div>
+      </section>
     </main>
   );
 }
