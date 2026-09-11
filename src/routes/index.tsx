@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import { createFileRoute } from "@tanstack/react-router";
 
 import fluted from "@/assets/fluted-glass.jpg";
@@ -11,6 +13,9 @@ import proj06 from "@/assets/proj-06.jpg";
 import svc01 from "@/assets/svc-01.jpg";
 import svc02 from "@/assets/svc-02.jpg";
 import svc03 from "@/assets/svc-03.jpg";
+import client01 from "@/assets/client-01.jpg";
+import client02 from "@/assets/client-02.jpg";
+import client03 from "@/assets/client-03.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -102,7 +107,42 @@ const services = [
   },
 ];
 
+const testimonials = [
+  {
+    img: client01,
+    imgAlt: "Client working at a laptop behind a glass office wall",
+    quote:
+      "Working with Jolene is a pleasure. She clearly knows her field and consistently advises us with our best interest in mind. It’s reassuring to have someone so reliable and thoughtful on our side.",
+    name: "Stephanie Straatman",
+    company: "Voxdale BV",
+  },
+  {
+    img: client02,
+    imgAlt: "Smiling businesswoman with a laptop in a cafe",
+    quote:
+      "Jo took our vague ideas and turned them into a website that finally feels like us. The whole process was calm, clear, and faster than we expected.",
+    name: "Marié Botha",
+    company: "Botha & Co.",
+  },
+  {
+    img: client03,
+    imgAlt: "Designer reviewing sketches pinned to a studio wall",
+    quote:
+      "Every detail was considered, from the first sketch to launch day. Our new site loads fast, looks sharp, and our clients notice the difference.",
+    name: "Daniel Kruger",
+    company: "Kruger Studio",
+  },
+];
+
 function Index() {
+  const [active, setActive] = useState(0);
+  const [tick, setTick] = useState(0);
+  const t = testimonials[active]!;
+
+  const go = (dir: 1 | -1) => {
+    setActive((a) => (a + dir + testimonials.length) % testimonials.length);
+    setTick((k) => k + 1);
+  };
   return (
     <main className="bg-neutral-950">
       {/* Hero */}
@@ -326,6 +366,60 @@ function Index() {
             <span className="font-semibold text-white">Framer template</span> selection and
             customisation for businesses that want to launch faster with a strong foundation.
           </p>
+        </div>
+      </section>
+
+      {/* (04) Testimonials */}
+      <section id="testimonials" className="w-full bg-white text-black">
+        <div className="flex items-center justify-between border-t border-black/15 px-6 py-4 text-xs md:px-10">
+          <span>(04)</span>
+          <span>Testimonials</span>
+        </div>
+
+        <div
+          key={tick}
+          className="grid animate-fade-in gap-10 px-6 py-16 md:grid-cols-[auto_1fr] md:gap-24 md:px-10 md:py-24"
+        >
+          <div className="flex flex-col gap-6">
+            <img
+              src={t.img}
+              alt={t.imgAlt}
+              loading="lazy"
+              width={800}
+              height={800}
+              className="w-44 rounded-lg object-cover md:w-52"
+            />
+            <div>
+              <p className="text-sm font-semibold">{t.name}</p>
+              <p className="text-sm text-black/45">{t.company}</p>
+            </div>
+            <div className="mt-4 flex gap-3">
+              <button
+                type="button"
+                onClick={() => go(-1)}
+                aria-label="Previous testimonial"
+                className="flex h-12 w-12 items-center justify-center rounded-lg bg-black/5 text-black transition-all duration-200 hover:bg-black/10 active:scale-90"
+              >
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-4 w-4" aria-hidden="true">
+                  <path d="M15 6l-6 6 6 6" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
+              <button
+                type="button"
+                onClick={() => go(1)}
+                aria-label="Next testimonial"
+                className="flex h-12 w-12 items-center justify-center rounded-lg bg-black/5 text-black transition-all duration-200 hover:bg-black/10 active:scale-90"
+              >
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-4 w-4" aria-hidden="true">
+                  <path d="M9 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <blockquote className="max-w-4xl text-[6.5vw] font-semibold leading-[1.08] tracking-[-0.02em] md:text-[3.4vw]">
+            “{t.quote}”
+          </blockquote>
         </div>
       </section>
     </main>
