@@ -337,10 +337,15 @@ function Index() {
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* About */}
-      <section className="w-full border-t border-white/10 bg-neutral-950 px-6 py-12 md:px-14 md:py-16">
+      <motion.section
+        ref={aboutRef}
+        style={{ clipPath, willChange: "clip-path" }}
+        className="relative z-10 -mt-[14vh] w-full bg-neutral-950 px-6 pb-12 pt-[22vh] md:-mt-[16vh] md:px-14 md:pb-16 md:pt-[26vh]"
+      >
+        <div className="mb-4 h-px w-full bg-white/15" />
         <div className="flex items-start justify-between">
           <span className="text-xs font-semibold tracking-wide text-white">(01)</span>
           <span className="text-xs font-semibold tracking-wide text-white">About</span>
