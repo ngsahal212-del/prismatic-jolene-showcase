@@ -107,6 +107,56 @@ const services = [
   },
 ];
 
+const plans: { name: string; blurb: string; price: string; features: string[]; dark?: boolean }[] = [
+  {
+    name: "Landing Page",
+    blurb: "A polished custom landing page designed and developed for businesses that need a focused, high-performing online presence.",
+    price: "€1,400",
+    features: [
+      "Development from a completed, build-ready Figma file",
+      "Responsive development in Framer or Wix Studio",
+      "Clean and consistent page build",
+      "Forms, links, interactions, and core functionality",
+      "Basic SEO and performance setup",
+      "Pre-launch testing, refinement, and launch support",
+    ],
+  },
+  {
+    name: "Multi-Page Website",
+    blurb: "A multi-page custom website for businesses that need more content space, stronger structure, and optional simple CMS setup.",
+    price: "€3,400",
+    features: [
+      "Development from a completed, build-ready Figma file",
+      "Responsive development in Framer or Wix Studio",
+      "Clean and consistent multi-page build",
+      "Forms, links, interactions, and core site functionality",
+      "Simple CMS setup where needed",
+      "Basic SEO and performance setup",
+      "Pre-launch testing, refinement, and launch support",
+    ],
+  },
+  {
+    name: "Advanced Website",
+    blurb: "For larger websites and more complex projects with advanced CMS setups, added functionality, and custom code components.",
+    price: "€8,500",
+    dark: true,
+    features: [
+      "Discovery session to clarify goals and requirements",
+      "Conversion-focused strategy and page planning",
+      "Content guidance and messaging review",
+      "Custom website design in Figma",
+      "Custom visual direction aligned with your brand",
+      "Responsive development in Framer or Wix Studio",
+      "Structured layout, typography, and visual hierarchy",
+      "Forms, links, interactions, and core site functionality",
+      "Advanced CMS setup and content organisation",
+      "Custom code components where required",
+      "Basic SEO and performance setup",
+      "Pre-launch testing, refinement, and launch support",
+    ],
+  },
+];
+
 const testimonials = [
   {
     img: client01,
@@ -420,6 +470,66 @@ function Index() {
           <blockquote className="max-w-4xl text-[6.5vw] font-semibold leading-[1.08] tracking-[-0.02em] md:text-[3.4vw]">
             “{t.quote}”
           </blockquote>
+        </div>
+      </section>
+
+      {/* (05) Estimates */}
+      <section id="estimates" className="w-full bg-white text-black">
+        <div className="flex items-center justify-between border-t border-black/15 px-6 py-4 text-xs md:px-10">
+          <span>(05)</span>
+          <span>Estimates</span>
+        </div>
+
+        <div className="grid gap-4 px-6 pb-10 pt-10 md:grid-cols-3 md:px-10 md:pt-14">
+          {plans.map((p) => (
+            <div
+              key={p.name}
+              className={`flex flex-col rounded-xl p-7 md:p-8 ${
+                p.dark ? "bg-[#0c0c0c] text-white" : "bg-black/[0.045] text-black"
+              }`}
+            >
+              <h3 className="text-base font-semibold tracking-[-0.01em]">{p.name}</h3>
+              <p className={`mt-3 text-sm leading-relaxed ${p.dark ? "text-white/55" : "text-black/45"}`}>
+                {p.blurb}
+              </p>
+
+              <p className="mt-10 flex items-baseline gap-1.5 md:mt-14">
+                <span className="text-5xl font-bold tracking-[-0.03em]">{p.price}</span>
+                <span className="text-sm font-medium">
+                  <sup>+</sup>/website
+                </span>
+              </p>
+
+              <div className="mt-6 flex flex-wrap gap-2">
+                <span className={`rounded-md px-3 py-1.5 text-xs font-semibold ${p.dark ? "bg-white text-black" : "bg-black text-white"}`}>
+                  Development
+                </span>
+                <span className={`rounded-md border px-3 py-1.5 text-xs font-medium ${p.dark ? "border-white/25 text-white/85" : "border-black/20 text-black/70"}`}>
+                  Design + Development
+                </span>
+              </div>
+
+              <p className="mt-9 text-sm font-semibold">What's included</p>
+              <ul className="mt-4 flex flex-col gap-2.5">
+                {p.features.map((f) => (
+                  <li key={f} className={`flex gap-2.5 text-sm ${p.dark ? "text-white/65" : "text-black/50"}`}>
+                    <span className="mt-0.5">+</span>
+                    <span>{f}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+
+        <div className="flex flex-col gap-3 px-6 pb-14 md:flex-row md:items-start md:gap-16 md:px-10">
+          <p className="shrink-0 text-sm font-semibold md:w-64">Custom quotes and add-ons</p>
+          <p className="max-w-3xl text-sm leading-relaxed text-black/45">
+            These prices are general estimates based on typical custom website scopes.{" "}
+            <span className="font-semibold text-black">Framer template</span> customisation, branding, copywriting, and
+            other supporting digital assets are quoted separately where needed. All enquiries begin with a
+            questionnaire, followed by a personalised quote.
+          </p>
         </div>
       </section>
     </main>
