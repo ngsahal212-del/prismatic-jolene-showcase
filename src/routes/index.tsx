@@ -1,6 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import fluted from "@/assets/fluted-glass.jpg";
 import portrait from "@/assets/portrait-jo.jpg";
+import proj01 from "@/assets/proj-01.jpg";
+import proj02 from "@/assets/proj-02.jpg";
+import proj03 from "@/assets/proj-03.jpg";
+import proj04 from "@/assets/proj-04.jpg";
+import proj05 from "@/assets/proj-05.jpg";
+import proj06 from "@/assets/proj-06.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
