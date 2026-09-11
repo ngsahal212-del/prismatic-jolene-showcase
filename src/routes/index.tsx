@@ -398,7 +398,7 @@ function Index() {
             </div>
           ))}
         </div>
-      </section>
+      </motion.section>
 
       {/* (02) Portfolio */}
       <section id="portfolio" className="w-full bg-white text-black">
