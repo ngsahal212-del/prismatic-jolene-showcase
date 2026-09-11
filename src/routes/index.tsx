@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 import { createFileRoute } from "@tanstack/react-router";
+import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 
 import { SiteClosing } from "@/components/SiteClosing";
 import fluted from "@/assets/fluted-glass.jpg";
@@ -246,6 +247,23 @@ function Index() {
   const [tick, setTick] = useState(0);
   const t = testimonials[active]!;
 
+  const aboutRef = useRef<HTMLElement | null>(null);
+  const { scrollYProgress } = useScroll({
+    target: aboutRef,
+    offset: ["start end", "start start"],
+  });
+  const smooth = useSpring(scrollYProgress, { stiffness: 38, damping: 26, mass: 1.1 });
+  const clipPath = useTransform(
+    smooth,
+    [0, 1],
+    [
+      "polygon(0% 0%, 100% 14%, 100% 100%, 0% 100%)",
+      "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+    ],
+  );
+  const heroScale = useTransform(smooth, [0, 1], [1, 1.06]);
+  const heroOpacity = useTransform(smooth, [0, 1], [1, 0.55]);
+
   const go = (dir: 1 | -1) => {
     setActive((a) => (a + dir + testimonials.length) % testimonials.length);
     setTick((k) => k + 1);
@@ -253,7 +271,10 @@ function Index() {
   return (
     <main className="bg-neutral-950">
       {/* Hero */}
-      <section className="relative h-screen w-full overflow-hidden [height:100dvh]">
+      <motion.section
+        style={{ scale: heroScale, opacity: heroOpacity }}
+        className="sticky top-0 h-screen w-full overflow-hidden [height:100dvh]"
+      >
         <img
           src={fluted}
           alt=""
