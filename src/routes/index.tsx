@@ -137,7 +137,7 @@ const testimonials = [
 function Index() {
   const [active, setActive] = useState(0);
   const [tick, setTick] = useState(0);
-  const t = testimonials[active];
+  const t = testimonials[active]!;
 
   const go = (dir: 1 | -1) => {
     setActive((a) => (a + dir + testimonials.length) % testimonials.length);
