@@ -265,6 +265,69 @@ function Index() {
           </div>
         </div>
       </section>
+
+      {/* (03) Services */}
+      <section id="services" className="w-full bg-neutral-950 text-white">
+        <div className="flex items-center justify-between border-t border-white/15 px-6 py-4 text-xs font-semibold md:px-10">
+          <span>(03)</span>
+          <span>Services</span>
+        </div>
+
+        {/* Intro */}
+        <div className="flex flex-col gap-10 px-6 pt-14 pb-24 md:flex-row md:items-start md:gap-16 md:px-10 md:pt-20 md:pb-32">
+          <img
+            src={portrait}
+            alt="Grayscale portrait of Jolene Koekemoer"
+            loading="lazy"
+            width={896}
+            height={1152}
+            className="w-40 shrink-0 rounded-lg object-cover grayscale md:w-52"
+          />
+          <h2 className="max-w-5xl text-[7.5vw] font-bold leading-[1.04] tracking-[-0.03em] md:text-[3.9vw]">
+            A thoughtful mix of planning, design, and development for clean, modern websites that
+            are simple to use, easy to manage, and designed to support real business needs.
+          </h2>
+        </div>
+
+        {/* Stages */}
+        <div>
+          {services.map((s) => (
+            <div
+              key={s.n}
+              className="grid gap-10 border-t border-white/15 px-6 py-16 md:grid-cols-[1fr_1.2fr_1fr] md:gap-16 md:px-10 md:py-24"
+            >
+              <div>
+                <span className="text-sm font-semibold text-white">{s.n}</span>
+                <h3 className="mt-2 text-4xl font-bold tracking-[-0.02em] text-white md:text-6xl">
+                  {s.title}
+                </h3>
+              </div>
+              <img
+                src={s.img}
+                alt={s.imgAlt}
+                loading="lazy"
+                width={960}
+                height={640}
+                className="w-full rounded-xl object-cover"
+              />
+              <div className="max-w-sm md:justify-self-end">
+                <h4 className="text-base font-semibold text-white">{s.heading}</h4>
+                <p className="mt-3 text-sm leading-relaxed text-white/55">{s.text}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Template-based projects */}
+        <div className="grid gap-6 border-t border-white/15 px-6 py-16 md:grid-cols-[1fr_1.2fr_1fr] md:gap-16 md:px-10 md:py-24">
+          <h3 className="text-base font-semibold text-white md:col-start-1">Template-Based Projects</h3>
+          <p className="max-w-md text-sm leading-relaxed text-white/55 md:col-start-2">
+            Alongside custom website projects, I also offer{" "}
+            <span className="font-semibold text-white">Framer template</span> selection and
+            customisation for businesses that want to launch faster with a strong foundation.
+          </p>
+        </div>
+      </section>
     </main>
   );
 }
