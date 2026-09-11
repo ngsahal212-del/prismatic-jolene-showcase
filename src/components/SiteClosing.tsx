@@ -56,6 +56,7 @@ export function SiteClosing({ showCta = true }: { showCta?: boolean }) {
           </div>
         </div>
       </section>
+      )}
 
       {/* Footer */}
       <footer className="w-full bg-[#0c0c0c] text-white">
