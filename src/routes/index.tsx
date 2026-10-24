@@ -1,624 +1,200 @@
-import { useRef, useState } from "react";
-
-import { createFileRoute } from "@tanstack/react-router";
-
-import { SlopedSection } from "@/components/SlopedSection";
-import { SiteClosing } from "@/components/SiteClosing";
-import fluted from "@/assets/fluted-glass.jpg";
-import portrait from "@/assets/portrait-jo.jpg";
-import proj01 from "@/assets/proj-01.jpg";
-import proj02 from "@/assets/proj-02.jpg";
-import proj03 from "@/assets/proj-03.jpg";
-import proj04 from "@/assets/proj-04.jpg";
-import proj05 from "@/assets/proj-05.jpg";
-import proj06 from "@/assets/proj-06.jpg";
-import svc01 from "@/assets/svc-01.jpg";
-import svc02 from "@/assets/svc-02.jpg";
-import svc03 from "@/assets/svc-03.jpg";
-import client01 from "@/assets/client-01.jpg";
-import client02 from "@/assets/client-02.jpg";
-import client03 from "@/assets/client-03.jpg";
+import { useEffect, useState } from "react";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { motion } from "framer-motion";
+import { Header } from "@/components/site/Header";
+import { Footer } from "@/components/site/Footer";
+import { GameCard } from "@/components/site/GameCard";
+import { GAMES } from "@/lib/games";
+import { loadScores, type ScoreEntry } from "@/lib/leaderboard";
+import { useFavorites } from "@/hooks/useFavorites";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Jolene Koekemoer — Website Designer & Developer" },
+      {
+        title: "Khalid Entertiming India Pvt Ltd — Free Browser Games",
+      },
       {
         name: "description",
         content:
-          "Professional website designer and developer creating modern, user-friendly websites built for visibility, usability, and performance.",
+          "Play Neon Snake, Tic-Tac-Toe, Memory Match, Rock Paper Scissors and Neon Jump free in your browser. No accounts, no payments — just games.",
       },
-      { property: "og:title", content: "Jolene Koekemoer — Website Designer & Developer" },
+      { property: "og:title", content: "Khalid Entertiming India Pvt Ltd" },
       {
         property: "og:description",
-        content:
-          "Modern, user-friendly websites built for visibility, usability, and performance.",
+        content: "Your next favorite game starts here — five free browser games, no login required.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  component: Index,
+  component: HomePage,
 });
 
-const nav = [
-  { label: "Home", index: "01", href: "/" },
-  { label: "Portfolio", index: "02", href: "/portfolio" },
-  { label: "Contact", index: "03", href: "/contact" },
+const FLOATERS = [
+  { emoji: "🐍", className: "top-16 left-[6%] text-5xl", delay: "0s" },
+  { emoji: "👾", className: "top-24 right-[8%] text-6xl", delay: "0.8s" },
+  { emoji: "🕹️", className: "bottom-16 left-[12%] text-6xl", delay: "1.6s" },
+  { emoji: "⭐", className: "bottom-24 right-[14%] text-5xl", delay: "2.4s" },
+  { emoji: "🎲", className: "top-1/2 left-[3%] text-4xl", delay: "3.2s" },
 ];
 
-const credentials = [
-  {
-    title: "Framer Pro Partner",
-    text: "Recognised by Framer as a trusted independent partner",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="currentColor" className="h-6 w-6" aria-hidden="true">
-        <path d="M4 4h16l-8 8H4V4zm0 8h8l-8 8v-8zm8 0h8l-8 8 8-8z" fillRule="evenodd" />
-      </svg>
-    ),
-  },
-  {
-    title: "Wix Legend Partner",
-    text: "Wix's highest recognition for partners, 70+ Wix Websites",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="currentColor" className="h-6 w-6" aria-hidden="true">
-        <path d="M4 4h16v16H4V4zm6 6h4v4h-4v-4z" fillRule="evenodd" />
-      </svg>
-    ),
-  },
-  {
-    title: "Upwork Top 10% Talent",
-    text: "100% Job Success, 100+ Projects, Top-Rated Since 2016",
-    icon: <span className="text-2xl font-bold leading-none">Up</span>,
-  },
-];
+function HomePage() {
+  const { favs, toggleFav } = useFavorites();
+  const [top, setTop] = useState<ScoreEntry[]>([]);
 
-const projects = [
-  { img: proj01, name: "Jessica Webster", category: "eCommerce", year: "2026" },
-  { img: proj02, name: "Daka Expeditions", category: "Hospitality", year: "2025" },
-  { img: proj03, name: "Samsar Battery", category: "Technology", year: "2024" },
-  { img: proj04, name: "Vanguard Studio", category: "Architecture", year: "2024" },
-  { img: proj05, name: "Nordic Form", category: "Interior Design", year: "2023" },
-  { img: proj06, name: "Shootsy.io", category: "SaaS", year: "2022" },
-];
+  useEffect(() => {
+    setTop(loadScores().slice(0, 3));
+  }, []);
 
-const services = [
-  {
-    n: "01",
-    title: "Planning",
-    img: svc01,
-    imgAlt: "Hand pointing at a product roadmap sketched on a whiteboard",
-    heading: "Clear foundations",
-    text: "Planning the website before design and development begins. I shape the structure, content flow, and user journey so the website feels clear, organised, and ready to grow.",
-  },
-  {
-    n: "02",
-    title: "Design",
-    img: svc02,
-    imgAlt: "Open brand guidelines booklet showing color palettes and typography",
-    heading: "Creative direction",
-    text: "Designing clean, modern websites that feel aligned with your brand and easy to use. I focus on layout, typography, spacing, and consistency to create clear, considered, and visually strong designs.",
-  },
-  {
-    n: "03",
-    title: "Development",
-    img: svc03,
-    imgAlt: "Smartphone on a concrete block displaying a responsive website",
-    heading: "Build to perform",
-    text: "Bringing the website to life in Framer or Wix Studio with care and precision. I build responsive, well-structured websites that are easy to manage, scalable, and ready for a smooth launch.",
-  },
-];
-
-type PlanMode = { price: string; features: string[] };
-type Plan = { name: string; blurb: string; dark?: boolean; dev: PlanMode; full: PlanMode };
-
-const plans: Plan[] = [
-  {
-    name: "Landing Page",
-    blurb:
-      "A polished custom landing page designed and developed for businesses that need a focused, high-performing online presence.",
-    dev: {
-      price: "€1,400",
-      features: [
-        "Development from a completed, build-ready Figma file",
-        "Responsive development in Framer or Wix Studio",
-        "Clean and consistent page build",
-        "Forms, links, interactions, and core functionality",
-        "Basic SEO and performance setup",
-        "Pre-launch testing, refinement, and launch support",
-      ],
-    },
-    full: {
-      price: "€2,400",
-      features: [
-        "Discovery session to clarify goals and requirements",
-        "Conversion-focused strategy and page planning",
-        "Content guidance and messaging review",
-        "Custom landing page design in Figma",
-        "Custom visual direction aligned with your brand",
-        "Responsive development in Framer or Wix Studio",
-        "Structured layout, typography, and visual hierarchy",
-        "Forms, links, interactions, and core site functionality",
-        "Basic SEO and performance setup",
-        "Pre-launch testing, refinement, and launch support",
-      ],
-    },
-  },
-  {
-    name: "Multi-Page Website",
-    blurb:
-      "A multi-page custom website for businesses that need more content space, stronger structure, and optional simple CMS setup.",
-    dev: {
-      price: "€3,400",
-      features: [
-        "Development from a completed, build-ready Figma file",
-        "Responsive development in Framer or Wix Studio",
-        "Clean and consistent multi-page build",
-        "Forms, links, interactions, and core site functionality",
-        "Simple CMS setup where needed",
-        "Basic SEO and performance setup",
-        "Pre-launch testing, refinement, and launch support",
-      ],
-    },
-    full: {
-      price: "€5,400",
-      features: [
-        "Discovery session to clarify goals and requirements",
-        "Conversion-focused strategy and page planning",
-        "Content guidance and messaging review",
-        "Custom website design in Figma",
-        "Custom visual direction aligned with your brand",
-        "Responsive development in Framer or Wix Studio",
-        "Structured layout, typography, and visual hierarchy",
-        "Forms, links, interactions, and core site functionality",
-        "Simple CMS setup where needed",
-        "Basic SEO and performance setup",
-        "Pre-launch testing, refinement, and launch support",
-      ],
-    },
-  },
-  {
-    name: "Advanced Website",
-    blurb:
-      "For larger websites and more complex projects with advanced CMS setups, added functionality, and custom code components.",
-    dark: true,
-    dev: {
-      price: "€6,500",
-      features: [
-        "Development from a completed, build-ready Figma file",
-        "Responsive development in Framer or Wix Studio",
-        "Clean and consistent multi-page build",
-        "Forms, links, interactions, and core site functionality",
-        "Advanced CMS setup and content organisation",
-        "Custom code components where required",
-        "Basic SEO and performance setup",
-        "Pre-launch testing, refinement, and launch support",
-      ],
-    },
-    full: {
-      price: "€8,500",
-      features: [
-        "Discovery session to clarify goals and requirements",
-        "Conversion-focused strategy and page planning",
-        "Content guidance and messaging review",
-        "Custom website design in Figma",
-        "Custom visual direction aligned with your brand",
-        "Responsive development in Framer or Wix Studio",
-        "Structured layout, typography, and visual hierarchy",
-        "Forms, links, interactions, and core site functionality",
-        "Advanced CMS setup and content organisation",
-        "Custom code components where required",
-        "Basic SEO and performance setup",
-        "Pre-launch testing, refinement, and launch support",
-      ],
-    },
-  },
-];
-
-const testimonials = [
-  {
-    img: client01,
-    imgAlt: "Client working at a laptop behind a glass office wall",
-    quote:
-      "Working with Jolene is a pleasure. She clearly knows her field and consistently advises us with our best interest in mind. It’s reassuring to have someone so reliable and thoughtful on our side.",
-    name: "Stephanie Straatman",
-    company: "Voxdale BV",
-  },
-  {
-    img: client02,
-    imgAlt: "Smiling businesswoman with a laptop in a cafe",
-    quote:
-      "Jo took our vague ideas and turned them into a website that finally feels like us. The whole process was calm, clear, and faster than we expected.",
-    name: "Marié Botha",
-    company: "Botha & Co.",
-  },
-  {
-    img: client03,
-    imgAlt: "Designer reviewing sketches pinned to a studio wall",
-    quote:
-      "Every detail was considered, from the first sketch to launch day. Our new site loads fast, looks sharp, and our clients notice the difference.",
-    name: "Daniel Kruger",
-    company: "Kruger Studio",
-  },
-];
-
-function Index() {
-  const [active, setActive] = useState(0);
-  const [tick, setTick] = useState(0);
-  const t = testimonials[active]!;
-
-  const go = (dir: 1 | -1) => {
-    setActive((a) => (a + dir + testimonials.length) % testimonials.length);
-    setTick((k) => k + 1);
-  };
   return (
-    <main className="bg-neutral-950">
-      {/* Hero */}
-      <section className="sticky top-0 z-0 h-screen w-full overflow-hidden [height:100dvh]">
-        <img
-          src={fluted}
-          alt=""
-          width={1920}
-          height={1088}
-          className="absolute inset-0 h-full w-full object-cover"
-        />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/25 via-transparent to-black/25" />
-
-        {/* Vertical slat overlay */}
-        <div
-          className="pointer-events-none absolute inset-0 opacity-40 mix-blend-overlay"
-          style={{
-            backgroundImage:
-              "repeating-linear-gradient(90deg, rgba(255,255,255,0.35) 0px, rgba(255,255,255,0) 6px, rgba(0,0,0,0.18) 40px, rgba(255,255,255,0) 74px, rgba(255,255,255,0.35) 80px)",
-          }}
-        />
-
-        <div className="relative flex h-full flex-col justify-between p-6 md:p-10">
-          <header className="flex items-start justify-between">
-            <span className="text-sm font-medium tracking-wide text-white">© J — K</span>
-            <nav className="flex items-start gap-6 md:gap-12">
-              {nav.map((item) => (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  className="group flex items-start gap-1.5 text-sm font-medium text-white transition-opacity hover:opacity-70 md:text-base"
-                >
-                  {item.label}
-                  <sup className="text-[0.6em] text-white/70">{item.index}</sup>
-                </a>
-              ))}
-            </nav>
-          </header>
-
-          <div className="flex flex-col items-start justify-between gap-10 md:flex-row md:items-end">
-            <h1 className="max-w-[12ch] text-[15vw] font-bold leading-[0.88] tracking-[-0.03em] text-white md:text-[8.5vw]">
-              Jolene
-              <br />
-              Koekemoer
-            </h1>
-
-            <div className="w-full max-w-md text-right">
-              <svg
-                viewBox="0 0 48 48"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.25"
-                className="animate-spin-globe mb-8 h-11 w-11 text-white"
-                aria-hidden="true"
-              >
-                <circle cx="24" cy="24" r="17" />
-                <ellipse cx="24" cy="24" rx="7.5" ry="17" />
-                <path d="M7 24h34M10 14.5h28M10 33.5h28" />
-              </svg>
-              <p className="text-right text-sm leading-snug font-semibold text-white md:text-base">
-                Professional website designer and developer creating modern, user-friendly websites
-                built for visibility, usability, and performance.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* About */}
-      <SlopedSection className="w-full bg-neutral-950 px-6 pb-12 pt-[190px] md:px-14 md:pb-16 md:pt-[230px]">
-        <div className="mb-4 h-px w-full bg-white/15" />
-        <div className="flex items-start justify-between">
-          <span className="text-xs font-semibold tracking-wide text-white">(01)</span>
-          <span className="text-xs font-semibold tracking-wide text-white">About</span>
-        </div>
-
-        <h2
-          className="mt-10 max-w-6xl text-[9vw] font-bold leading-[1.02] tracking-[-0.03em] text-white md:mt-12 md:text-[4.6vw]"
-          style={{ textIndent: "9%" }}
-        >
-          I’m Jo, a website designer and no-code developer with over a decade of experience,
-          specialising in clean, scalable website design in Framer and Wix Studio.
-        </h2>
-
-        <div className="mt-20 grid gap-14 md:mt-28 md:grid-cols-[1fr_1.2fr_1fr] md:gap-20">
-          <div className="flex flex-col gap-16 md:col-span-2 md:grid md:grid-cols-[auto_1fr] md:gap-x-24 md:gap-y-24">
-            <h3 className="text-sm font-semibold text-white">Background</h3>
-            <p className="max-w-md text-sm leading-relaxed text-white/55">
-              My design career started in graphic design in 2010, before naturally expanding into
-              web design. Since 2012, I’ve worked in web design full-time and have completed well
-              over 100 websites across a wide range of industries, including e-commerce,
-              hospitality, consulting, nonprofit, energy, and SaaS. I specialise in Framer and Wix
-              Studio, with Figma as part of my design process.
-            </p>
-
-            <h3 className="text-sm font-semibold text-white">Approach</h3>
-            <p className="max-w-md text-sm leading-relaxed text-white/55">
-              I work with a limited number of clients each year so I can give every project the
-              attention it deserves. My approach is collaborative, thoughtful, and adapted to each
-              brand. I care about my clients’ successes, celebrate their wins, and always aim to
-              meet their needs, solve problems, and nurture them. Always learning. Always growing.
-            </p>
-          </div>
-
-          <img
-            src={portrait}
-            alt="Black and white portrait of Jolene Koekemoer"
-            loading="lazy"
-            width={896}
-            height={1152}
-            className="w-full max-w-sm self-start rounded-lg object-cover grayscale"
-          />
-        </div>
-
-        <div className="mt-24 grid gap-10 border-t border-white/15 pt-10 md:grid-cols-3 md:gap-16">
-          {credentials.map((c) => (
-            <div key={c.title}>
-              <div className="mb-4 text-white">{c.icon}</div>
-              <h4 className="text-sm font-semibold text-white">{c.title}</h4>
-              <p className="mt-1 max-w-xs text-sm leading-snug text-white/55">{c.text}</p>
-            </div>
+    <div className="flex min-h-screen flex-col bg-background text-foreground">
+      <Header />
+      <main className="flex-1">
+        {/* Hero */}
+        <section className="bg-hero-nebula relative overflow-hidden px-4 py-20 text-center md:py-28">
+          {FLOATERS.map((f) => (
+            <span
+              key={f.emoji}
+              aria-hidden="true"
+              className={`animate-float pointer-events-none absolute opacity-70 ${f.className}`}
+              style={{ animationDelay: f.delay }}
+            >
+              {f.emoji}
+            </span>
           ))}
-        </div>
-      </SlopedSection>
 
-      {/* (02) Portfolio */}
-      <SlopedSection id="portfolio" className="w-full bg-white pt-[150px] text-black">
-        <div className="flex items-center justify-between border-t border-black/15 px-6 py-4 text-xs md:px-14">
-          <span>(02)</span>
-          <span>Portfolio</span>
-        </div>
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="relative mx-auto w-fit rounded-full border border-neon-cyan/30 bg-neon-cyan/10 px-4 py-1.5 text-xs font-bold tracking-wide text-neon-cyan md:text-sm"
+          >
+            🎮 5 FREE GAMES · NO LOGIN · NO ADS
+          </motion.p>
 
-        <div className="grid grid-cols-1 gap-10 px-6 pb-10 md:grid-cols-[1fr_1.4fr] md:gap-16 md:px-14 md:pb-12">
-          <div className="md:sticky md:top-24 md:h-fit md:self-start md:pt-16">
-            <h2 className="text-5xl font-semibold tracking-tight md:text-6xl">Portfolio</h2>
-            <p className="mt-1 text-lg text-black/70">2022–2026</p>
+          <motion.h1
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="relative mx-auto mt-6 max-w-3xl font-display text-4xl font-black leading-tight md:text-6xl"
+          >
+            Your Next <span className="text-glow text-neon-cyan">Favorite Game</span> Starts Here
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="relative mx-auto mt-5 max-w-xl text-base text-muted-foreground md:text-lg"
+          >
+            Bright, bouncy browser games from Khalid Entertiming India Pvt Ltd. Pick one and play instantly — right
+            here, right now.
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="relative mt-8 flex flex-wrap items-center justify-center gap-4"
+          >
+            <Link
+              to="/games"
+              className="rounded-full bg-primary px-8 py-3.5 font-display text-sm font-bold tracking-wide text-primary-foreground shadow-[0_0_30px_-6px_var(--neon-cyan)] transition-transform hover:scale-105 active:scale-95 md:text-base"
+            >
+              ▶ Play Now
+            </Link>
+            <Link
+              to="/leaderboard"
+              className="rounded-full border border-border px-8 py-3.5 font-display text-sm font-bold tracking-wide text-foreground transition-colors hover:border-neon-magenta/60 hover:text-neon-magenta md:text-base"
+            >
+              🏆 See Leaderboard
+            </Link>
+          </motion.div>
+
+          <div className="relative mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-muted-foreground">
+            <span>🕹️ 5 Original Games</span>
+            <span aria-hidden="true">·</span>
+            <span>⚡ Instant Play</span>
+            <span aria-hidden="true">·</span>
+            <span>🏆 Demo Leaderboard</span>
+          </div>
+        </section>
+
+        {/* Featured games */}
+        <section className="mx-auto max-w-6xl px-4 py-16 md:px-8">
+          <div className="flex flex-wrap items-end justify-between gap-3">
+            <div>
+              <h2 className="font-display text-2xl font-extrabold md:text-3xl">
+                Featured <span className="text-neon-lime">Games</span>
+              </h2>
+              <p className="mt-2 text-muted-foreground">Tap play — every game runs right in your browser.</p>
+            </div>
+            <Link to="/games" className="text-sm font-bold text-neon-cyan hover:underline">
+              View all games →
+            </Link>
           </div>
 
-          <div className="pt-8 md:pt-16">
-            {projects.map((p, i) => (
-              <article
-                key={p.name}
-                className="sticky bg-white pb-6"
-                style={{ top: `${80 + i * 18}px`, zIndex: i + 1 }}
+          <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {GAMES.map((g, i) => (
+              <motion.div
+                key={g.id}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.4, delay: (i % 3) * 0.06 }}
               >
-                <img
-                  src={p.img}
-                  alt={`${p.name} website mockup`}
-                  loading="lazy"
-                  width={1600}
-                  height={1000}
-                  className="w-full rounded-xl object-cover shadow-[0_-8px_30px_rgba(0,0,0,0.12)]"
-                />
-                <div className="mt-3 grid grid-cols-3 items-start text-xs">
-                  <span>({String(i + 1).padStart(2, "0")})</span>
-                  <span className="justify-self-center text-center">
-                    <span className="block font-semibold">{p.name}</span>
-                    <span className="block text-black/45">{p.category}</span>
-                  </span>
-                  <span className="justify-self-end">{p.year}</span>
-                </div>
-              </article>
+                <GameCard game={g} isFav={favs.includes(g.id)} onToggleFav={toggleFav} />
+              </motion.div>
             ))}
           </div>
-        </div>
-      </SlopedSection>
+        </section>
 
-      {/* (03) Services */}
-      <SlopedSection id="services" className="w-full bg-neutral-950 pt-[150px] text-white">
-        <div className="flex items-center justify-between border-t border-white/15 px-6 py-4 text-xs font-semibold md:px-14">
-          <span>(03)</span>
-          <span>Services</span>
-        </div>
-
-        {/* Intro */}
-        <div className="flex flex-col gap-10 px-6 pt-14 pb-24 md:flex-row md:items-start md:gap-16 md:px-14 md:pt-20 md:pb-32">
-          <img
-            src={portrait}
-            alt="Grayscale portrait of Jolene Koekemoer"
-            loading="lazy"
-            width={896}
-            height={1152}
-            className="w-40 shrink-0 rounded-lg object-cover grayscale md:w-52"
-          />
-          <h2 className="max-w-5xl text-[7.5vw] font-bold leading-[1.04] tracking-[-0.03em] md:text-[3.9vw]">
-            A thoughtful mix of planning, design, and development for clean, modern websites that
-            are simple to use, easy to manage, and designed to support real business needs.
-          </h2>
-        </div>
-
-        {/* Stages — stack on scroll */}
-        <div>
-          {services.map((s, i) => (
-            <div
-              key={s.n}
-              className="sticky top-0 grid gap-10 border-t border-white/15 bg-neutral-950 px-6 py-16 md:grid-cols-[1fr_1.2fr_1fr] md:gap-16 md:px-14 md:py-24"
-              style={{ zIndex: i + 1 }}
-            >
-              <div>
-                <span className="text-sm font-semibold text-white">{s.n}</span>
-                <h3 className="mt-2 text-4xl font-bold tracking-[-0.02em] text-white md:text-6xl">
-                  {s.title}
-                </h3>
-              </div>
-              <img
-                src={s.img}
-                alt={s.imgAlt}
-                loading="lazy"
-                width={960}
-                height={640}
-                className="w-full rounded-xl object-cover"
-              />
-              <div className="max-w-sm md:justify-self-end">
-                <h4 className="text-base font-semibold text-white">{s.heading}</h4>
-                <p className="mt-3 text-sm leading-relaxed text-white/55">{s.text}</p>
-              </div>
+        {/* Leaderboard preview */}
+        <section className="mx-auto max-w-4xl px-4 pb-20 md:px-8">
+          <div className="rounded-3xl border border-border bg-card p-6 md:p-8">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <h2 className="font-display text-xl font-extrabold md:text-2xl">
+                🏆 Top <span className="text-neon-orange">Scores</span>
+              </h2>
+              <span className="rounded-full bg-neon-orange/15 px-2.5 py-1 text-xs font-bold text-neon-orange">
+                DEMO DATA
+              </span>
             </div>
-          ))}
-        </div>
 
-        {/* Template-based projects */}
-        <div className="relative z-20 grid gap-6 border-t border-white/15 bg-neutral-950 px-6 py-16 md:grid-cols-[1fr_1.2fr_1fr] md:gap-16 md:px-14 md:py-24">
-          <h3 className="text-base font-semibold text-white md:col-start-1">Template-Based Projects</h3>
-          <p className="max-w-md text-sm leading-relaxed text-white/55 md:col-start-2">
-            Alongside custom website projects, I also offer{" "}
-            <span className="font-semibold text-white">Framer template</span> selection and
-            customisation for businesses that want to launch faster with a strong foundation.
-          </p>
-        </div>
-      </SlopedSection>
+            <ul className="mt-6 space-y-3">
+              {top.map((s, i) => (
+                <li
+                  key={`${s.game}-${s.player}-${s.score}`}
+                  className="flex items-center gap-4 rounded-2xl border border-border/60 bg-background/60 px-4 py-3"
+                >
+                  <span className="text-2xl" aria-hidden="true">
+                    {["🥇", "🥈", "🥉"][i]}
+                  </span>
+                  <span className="flex-1 font-semibold">
+                    {s.player}
+                    <span className="block text-xs font-normal text-muted-foreground">{s.game}</span>
+                  </span>
+                  <span className="font-display text-lg font-bold text-neon-cyan">{s.score}</span>
+                </li>
+              ))}
+              {top.length === 0 && (
+                <li className="py-6 text-center text-muted-foreground">Loading demo scores…</li>
+              )}
+            </ul>
 
-      {/* (04) Testimonials */}
-      <SlopedSection id="testimonials" className="w-full bg-white pt-[150px] text-black">
-        <div className="flex items-center justify-between border-t border-black/15 px-6 py-4 text-xs md:px-14">
-          <span>(04)</span>
-          <span>Testimonials</span>
-        </div>
-
-        <div
-          key={tick}
-          className="grid animate-fade-in gap-10 px-6 py-16 md:grid-cols-[auto_1fr] md:gap-24 md:px-14 md:py-24"
-        >
-          <div className="flex flex-col gap-6">
-            <img
-              src={t.img}
-              alt={t.imgAlt}
-              loading="lazy"
-              width={800}
-              height={800}
-              className="w-44 rounded-lg object-cover md:w-52"
-            />
-            <div>
-              <p className="text-sm font-semibold">{t.name}</p>
-              <p className="text-sm text-black/45">{t.company}</p>
-            </div>
-            <div className="mt-4 flex gap-3">
-              <button
-                type="button"
-                onClick={() => go(-1)}
-                aria-label="Previous testimonial"
-                className="flex h-12 w-12 items-center justify-center rounded-lg bg-black/5 text-black transition-all duration-200 hover:bg-black/10 active:scale-90"
+            <div className="mt-6 text-center">
+              <Link
+                to="/leaderboard"
+                className="text-sm font-bold text-neon-cyan hover:underline"
               >
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-4 w-4" aria-hidden="true">
-                  <path d="M15 6l-6 6 6 6" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </button>
-              <button
-                type="button"
-                onClick={() => go(1)}
-                aria-label="Next testimonial"
-                className="flex h-12 w-12 items-center justify-center rounded-lg bg-black/5 text-black transition-all duration-200 hover:bg-black/10 active:scale-90"
-              >
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-4 w-4" aria-hidden="true">
-                  <path d="M9 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </button>
+                See the full leaderboard →
+              </Link>
             </div>
           </div>
-
-          <blockquote className="max-w-4xl text-[6.5vw] font-semibold leading-[1.08] tracking-[-0.02em] md:text-[3.4vw]">
-            “{t.quote}”
-          </blockquote>
-        </div>
-      </SlopedSection>
-
-      {/* (05) Estimates */}
-      <section id="estimates" className="relative z-10 w-full bg-white text-black">
-        <div className="flex items-center justify-between border-t border-black/15 px-6 py-4 text-xs md:px-14">
-          <span>(05)</span>
-          <span>Estimates</span>
-        </div>
-
-        <div className="grid items-start gap-4 px-6 pb-12 pt-10 md:grid-cols-3 md:px-14 md:pt-14">
-          {plans.map((p) => (
-            <PlanCard key={p.name} plan={p} />
-          ))}
-        </div>
-
-        <div className="mx-6 flex flex-col gap-3 border-t border-black/10 py-10 pb-16 md:mx-14 md:flex-row md:items-start md:gap-16">
-          <p className="shrink-0 text-sm font-semibold md:w-72">Custom quotes and add-ons</p>
-          <p className="max-w-3xl text-sm leading-relaxed text-black/45">
-            These prices are general estimates based on typical custom website scopes.{" "}
-            <span className="font-semibold text-black">Framer template</span> customisation, branding, copywriting, and
-            other supporting digital assets are quoted separately where needed. All enquiries begin with a
-            questionnaire, followed by a personalised quote.
-          </p>
-        </div>
-      </section>
-
-      <div className="relative z-10">
-        <SiteClosing />
-      </div>
-    </main>
-  );
-}
-
-function PlanCard({ plan }: { plan: Plan }) {
-  const [mode, setMode] = useState<"dev" | "full">("full");
-  const dark = plan.dark;
-  const current = plan[mode];
-
-  const pill = (key: "dev" | "full", label: string) => {
-    const activePill = mode === key;
-    const base = "rounded-md px-3 py-1.5 text-xs transition-all duration-200 active:scale-95";
-    const styles = activePill
-      ? dark
-        ? "bg-white font-semibold text-black"
-        : "bg-black font-semibold text-white"
-      : dark
-        ? "border border-white/25 font-medium text-white/85 hover:bg-white/10"
-        : "border border-black/20 font-medium text-black/70 hover:bg-black/5";
-    return (
-      <button type="button" onClick={() => setMode(key)} aria-pressed={activePill} className={`${base} ${styles}`}>
-        {label}
-      </button>
-    );
-  };
-
-  return (
-    <div
-      className={`flex flex-col rounded-xl p-7 md:p-8 ${
-        dark ? "bg-[#0c0c0c] text-white" : "bg-black/[0.045] text-black"
-      }`}
-    >
-      <h3 className="text-base font-semibold tracking-[-0.01em]">{plan.name}</h3>
-      <p className={`mt-3 text-sm leading-relaxed ${dark ? "text-white/55" : "text-black/45"}`}>{plan.blurb}</p>
-
-      <p key={current.price} className="mt-10 flex animate-fade-in items-baseline gap-1.5 md:mt-14">
-        <span className="text-5xl font-bold tracking-[-0.03em]">{current.price}</span>
-        <span className="text-sm font-medium">
-          <sup>+</sup>/website
-        </span>
-      </p>
-
-      <div className="mt-6 flex flex-wrap gap-2">
-        {pill("dev", "Development")}
-        {pill("full", "Design + Development")}
-      </div>
-
-      <p className="mt-9 text-sm font-semibold">What's included</p>
-      <ul key={mode} className="mt-4 flex animate-fade-in flex-col gap-2.5">
-        {current.features.map((f) => (
-          <li key={f} className={`flex gap-2.5 text-sm ${dark ? "text-white/65" : "text-black/50"}`}>
-            <span className="mt-0.5">+</span>
-            <span>{f}</span>
-          </li>
-        ))}
-      </ul>
+        </section>
+      </main>
+      <Footer />
     </div>
   );
 }
